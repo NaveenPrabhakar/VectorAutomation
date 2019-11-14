@@ -116,23 +116,32 @@ option {
 	<br>
 	<br>
 	<div class="container">
+	<div class="">
+				 <div th:if="${confirmationMessage}" class="alert alert-success"
+          	role="alert" th:text=${confirmationMessage}></div>
+				<form action="#" th:action="@{/view_milk_member}" th:object="${member}" method="post">
+							<input type="text" class = "form-control" th:field="*{id}" placeholder="ಸದ್ಯಸರ ಸಂಖ್ಯೆ" required/>
+ 						<input type="submit" class ="btn btn-primary" value="ಹುಡುಕು "/>
+						</form>
+						</div>
+	
+	<form action="#" th:action="@{/save_milkCollection}" th:object="${milk_collection}" method="post">
 	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.id}"> </p><input type="text" th:field="*{member}" class="form-control" >
+		</div>
 
 		<div class="col-md-2">
-			<p th:text="#{milk.fat}"> </p><input type="text" class="form-control" name="watch" value=""
-				placeholder="">
+			<p th:text="#{milk.fat}"> </p><input type="text" th:field="*{fat}" class="form-control" >
 		</div>
 		<div class="col-md-2">
-			<p th:text="#{milk.snf}"> </p> <input type="text" class="form-control" name="watch" value=""
-				placeholder="">
+			<p th:text="#{milk.snf}"> </p> <input type="text" th:field="*{snf}"  class="form-control" >
 		</div>
+		<!-- <div class="col-md-2">
+			<p th:text="#{milk.water}"> </p> <input type="text" class="form-control" th:field="*{water}">
+		</div> -->
 		<div class="col-md-2">
-			<p th:text="#{milk.water}"> </p> <input type="text" class="form-control" name="watch" value=""
-				placeholder="">
-		</div>
-		<div class="col-md-2">
-			<p th:text="#{milk.amount}"> </p> <input type="text" class="form-control" name="watch" value=""
-				placeholder="watch">
+			<p th:text="#{milk.amount}"> </p> <input type="text" class="form-control" th:field="*{amount}">
 		</div>
 		<div class="col-md-2">
 			<span class="btn btn-primary" onclick="update($(this));"><span
@@ -148,39 +157,35 @@ option {
 
 
 	</div>
-	<div class="form-group row">
-
-		<div class="col-md-2">
-			<p th:text="#{member.id}"> </p><input type="text" class="form-control" name="watch"
-				value="" placeholder="watch">
-		</div>
-		<div class="col-md-1">
-			<p th:text="#{const.search}"> </p><span class="btn btn-primary" onclick="update($(this));"><span
-				class="glyphicon glyphicon-search" aria-hidden="true"></span> </span>
-		</div>
-
-	</div>
+	
 	
 	<div class="form-group row">
 
 		<div class="col-md-2">
-			<p th:text="#{member.id}"> </p><input type="text" class="form-control" name="watch"
-				value="" placeholder="">
+			<p th:text="#{member.id}"> </p><input type="text" class="form-control" th:field="*{member}">
 		</div>
+		 <!-- <div class="col-md-2">
+			<p th:text="#{member.name}"> </p><input type="text" th:field="*{member.name}">
+		</div>  -->
 		<div class="col-md-2">
-			<p th:text="#{member.name}"> </p><input type="text" class="form-control" name="watch"
-				value="" placeholder="">
-		</div>
-		<div class="col-md-2">
-			<p th:text="#{milk.shift}"> </p><select class="form-control" id="sel1">
-			<option><p th:text="#{milk.choose}"></p></option>
-    <option><p th:text="#{milk.morning}"> </p></option>
-    <option><p th:text="#{milk.evening}"> </p></option>
+			<p th:text="#{milk.shift}"> </p><select class="form-control" th:field="*{shift}" id="sel1">
+			
+    <option th:value="'ಹಸು'" th:text="ಹಸು"></option>
+							    <option th:value="'ಎಮ್ಮೆ'" th:text="ಎಮ್ಮೆ"></option>
   </select>
 		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.rasu}"> </p><select class="form-control" th:field="*{cattle_type}" id="sel1">
+			<option th:value="'ಹಸು'" th:text="ಹಸು"></option>
+							    <option th:value="'ಎಮ್ಮೆ'" th:text="ಎಮ್ಮೆ"></option>
+  </select>
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.quantity}"> </p><input type="text" class="form-control" th:field="*{quantity}">
+		</div>
 
 	</div>
-	
+		</form>
 	<div class="bs-docs-example">
 				<table class="table table-bordered">
 					<thead>

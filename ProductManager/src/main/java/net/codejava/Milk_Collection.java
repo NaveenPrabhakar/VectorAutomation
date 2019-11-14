@@ -18,7 +18,6 @@ public class Milk_Collection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	public long milk_collection_id ;
-	
 	public Date date;
 	public String shift;
 	public String quantity;

@@ -24,7 +24,7 @@ public class AppController {
 	private MemberService memberservice;
 	
 	@Autowired
-	private LoginService loginService;	
+	private LoginService loginService;	 
 	
 	@Autowired
 	private Milk_CollectionService milk_collectionservice;
@@ -37,14 +37,16 @@ public class AppController {
 		return "login";
 	}
 	
-	@RequestMapping("/welcome")
-    public String hello(){
-        return "welcome";
-    }
 	
-	@RequestMapping("/milk")
-    public String milk(){
-        return "millk_wizard";
+	
+	@RequestMapping("/milk_wizard")
+    public String milk(Model model){
+		Member member = new Member();
+		Milk_Collection milk_Collection = new Milk_Collection();
+		model.addAttribute("member", member);
+		model.addAttribute("milk_collection", milk_Collection);
+		
+        return "milk_wizard";
     }
 	
 	@RequestMapping("/logout")
@@ -173,36 +175,6 @@ public class AppController {
 		
 	}
 	
-	@RequestMapping("/index")
-	public String viewHomePage(Model model) {
-		List<Product> listProducts = service.listAll();
-		model.addAttribute("listProducts", listProducts);
-		
-		return "index";
-	}
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("product") Product product) {
-		service.save(product);
-		
-		return "redirect:/index";
-	}
-	
-
-	@RequestMapping("/edit/{id}")
-	public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
-		ModelAndView mav = new ModelAndView("edit_product");
-		Product product = service.get(id);
-		mav.addObject("product", product);
-
-		return mav;
-	}
-
-	@RequestMapping("/delete/{id}")
-	public String deleteProduct(@PathVariable(name = "id") int id) {
-		service.delete(id);
-		return "redirect:/";
-	}
-	
 	@GetMapping("/milk_data")
 	public ModelAndView getdata()
 	{
@@ -212,6 +184,30 @@ public class AppController {
 		mav.addObject("milk_member", milk);
 		return mav;
 	}
+	
+	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
+	public ModelAndView saveMolkCollection(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
+		milk_collectionservice.save(milk_collection);
+		modelAndView.addObject("confirmationMessage", "ಸದಸ್ಯರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		modelAndView.setViewName("milk_wizard");
+		return modelAndView;
+	}
+	@RequestMapping(value = "/view_milk_member", method = RequestMethod.POST)
+	public ModelAndView view_Milkmember(@ModelAttribute("member") Member member, ModelAndView modelAndView) {
+		ModelAndView mav = new ModelAndView("milk_wizard");
+		Boolean id_Exist = memberservice.is_Id_Exist(member.getId());
+		System.out.println("Bolean Value ---"+id_Exist);
+		if (id_Exist)
+		{
+		Member mem = memberservice.get(member.getId());
+		mav.addObject("listMember", mem);
+		}
+		else {
+			mav.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + member.getId());
+		}
+		return mav;
+	}
+	
 	
 	
 }
