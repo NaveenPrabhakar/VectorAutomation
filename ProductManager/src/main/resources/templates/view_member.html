@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Vector Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css" media="screen" />
+
+<script type="text/javascript"  th:src="@{js/jquery-2.1.4.min.js}"></script>
+
+<link href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700' rel='stylesheet' type='text/css' />
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css' />
+
+<script type="text/javascript"  th:src="@{js/move-top.js}"></script>
+<script type="text/javascript"  th:src="@{js/easing.js}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+	
+
+</script>
+<style type="text/css">
+ .sample{
+ outline: none;
+    border: 1px solid #E4E4E4;
+    background: #f5f5f5;
+    padding: 5px 20px;
+    width: 30%;
+    font-size: 14px;
+    color: #212121;
+    border-radius: 25px;
+    }
+    .data
+    {
+    outline: none;
+    padding: 10px 0;
+    font-size: 14px;
+    color: #212121;
+    background: #8399EB;
+    font-weight: bold;
+    width: 12%;
+    border: none;
+    text-transform: uppercase;
+	border-radius:20px;
+    }
+    .dropdown-menu {
+	background-color: transparent;
+}
+
+</style>
+
+</head>
+	
+<body>
+
+	<div class="top-nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+
+				<div class="collapse navbar-collapse navbar-right"
+					id="bs-example-navbar-collapse-1">
+					<nav class="menu menu--shylock">
+						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
+
+
+							<li><a href="">ಮಾಸ್ಟರ್ </a></li>
+							
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true">ಸದಸ್ಯರ
+									ಹೆಸರು ಸೇರಿಸಿ <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/add_member}">ಸದಸ್ಯರನ್ನು ಸೇರಿಸು</a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/view_member}">ಸದಸ್ಯರನ್ನು ವೀಕ್ಷಿಸಿ</a></li>
+								</ul></li>
+							<li><a href="blog.html">ದರ ಪಟ್ಟಿ</a></li>
+							<li><a href="short-codes.html">ಗೂಡ್ಸ್ ಮಾಸ್ಟರ್</a></li>
+							<li><a href="mail.html">ಮುಚ್ಚಿ</a></li>
+						</ul>
+					</nav>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div class="agileits_breadcrumbs">
+		<div class="container">
+			<div class="agileits_breadcrumbs_left">
+				
+			</div>
+			<div class="agileits_breadcrumbs_right">
+				<h2>ಸದಸ್ಯರನ್ನು ಸೇರಿಸು</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="">
+		<div class="container">
+			<div class="agile_mail_grids">
+				<div class="">
+				 <div th:if="${confirmationMessage}" class="alert alert-success"
+          	role="alert" th:text=${confirmationMessage}></div>
+				<form action="#" th:action="@{/view_member_ctr}" th:object="${member}" method="post">
+							<input type="text" class = "sample" th:field="*{id}" placeholder="ಸದ್ಯಸರ ಸಂಖ್ಯೆ" required/>
+ 						<input type="submit" class ="data" value="ಹುಡುಕು "/>
+						</form>
+						</div>
+						</div>
+			
+			<div class="bs-docs-example">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>ಸದಸ್ಯತ್ವ ಸಂಖ್ಯೆ</th>
+							<th>ಸದಸ್ಯರ ಹೆಸರುe</th>
+							<th>ದೂರವಾಣಿ ಸಂಖ್ಯೆ</th>
+							<th>ರಾಸು</th>
+							<th>ಅಧಾರ್ ಸಂಖ್ಯೆ</th>
+							<th>ಸದಸ್ಯರನ್ನು ಮಾರ್ಪಡಿಸಿ</th>
+						</tr>
+					</thead>
+					<tbody>
+						 <tr th:each="member : ${listMember}">
+            	<td th:text="${member.id}">Member ID</td>
+                <td th:text="${member.name}">Name</td>
+                <td th:text="${member.phone_number}">Phone Number</td>
+                <td th:text="${member.rasu}">Rasu</td>
+                <td th:text="${member.adhar_number}">Adhar Number</td>
+                <td>
+                	<a th:href="@{'/edit_member/' + ${member.id}}"><span class="label label-warning">Edit</span></a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete_member/' + ${member.id}}"><span class="label label-danger">Delete</span></a> 
+                </td>
+            </tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+<!-- //mail -->
+
+<!-- for bootstrap working -->
+	<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>

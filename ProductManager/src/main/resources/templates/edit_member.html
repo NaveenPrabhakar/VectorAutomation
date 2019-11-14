@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Vector Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css" media="screen" property="" />
+
+<script type="text/javascript"  th:src="@{js/jquery-2.1.4.min.js}"></script>
+
+<link href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700' rel='stylesheet' type='text/css' />
+<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css' />
+
+<script type="text/javascript"  th:src="@{js/move-top.js}"></script>
+<script type="text/javascript"  th:src="@{js/easing.js}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event){		
+			event.preventDefault();
+			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+		});
+	});
+	
+
+</script>
+
+<style>
+.dropdown-menu {
+	background-color: transparent;
+}
+</style>
+
+</head>
+	
+<body>
+
+	<div class="top-nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+
+				<div class="collapse navbar-collapse navbar-right"
+					id="bs-example-navbar-collapse-1">
+					<nav class="menu menu--shylock">
+						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
+
+
+							<li><a href="">ಮಾಸ್ಟರ್ </a></li>
+							
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true">ಸದಸ್ಯರ
+									ಹೆಸರು ಸೇರಿಸಿ <span class="caret"></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/add_member}">ಸದಸ್ಯರನ್ನು ಸೇರಿಸು</a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/view_member}">ಸದಸ್ಯರನ್ನು ವೀಕ್ಷಿಸಿ</a></li>
+								</ul></li>
+							<li><a href="blog.html">ದರ ಪಟ್ಟಿ</a></li>
+							<li><a href="short-codes.html">ಗೂಡ್ಸ್ ಮಾಸ್ಟರ್</a></li>
+							<li><a href="mail.html">ಮುಚ್ಚಿ</a></li>
+						</ul>
+					</nav>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+	<div class="agileits_breadcrumbs">
+		<div class="container">
+			<div class="agileits_breadcrumbs_left">
+				
+			</div>
+			<div class="agileits_breadcrumbs_right">
+				<h2>ಸದಸ್ಯರನ್ನು ಸೇರಿಸು</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="">
+		<div class="container">
+			
+			<div class="agile_mail_grids">
+				<div class="agile_mail_grid">
+				 <div th:if="${confirmationMessage}" class="alert alert-success"
+          role="alert" th:text=${confirmationMessage}></div>
+					<form action="#" th:action="@{/save_member}" th:object="${member}" method="post">
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{id}" readonly="readonly" />
+							<input type="text" th:field="*{name}" placeholder="ಸದ್ಯಸರ ಹೆಸರು" required/>
+							<input type="text" th:field="*{address}" placeholder="ವಿಳಾಸ" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{name_en}" placeholder="Member Name in English" required>
+							<input type="text" th:field="*{father_name}" placeholder="ತಂದೆಯ ಹೆಸರು" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{branch}" placeholder="Branch" required>
+							<input type="text" th:field="*{ifse}" placeholder="IFSC Code" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{father_name_en}" placeholder="Father Name In English" required>
+							<input type="text" th:field="*{account_number}" placeholder="Bank Accout Number" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{phone_number}" placeholder="ದೂರವಾಣಿ ಸಂಖ್ಯೆ" required>
+							<input type="text" th:field="*{adhar_number}" placeholder="ಅಧಾರ್ ಸಂಖ್ಯೆ" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{pangada}" placeholder="ಪಂಗಡಾ" required>
+							<input type="text" th:field="*{pangada2}" placeholder="ಪಂಗಡಾ 2" required>
+						</div>
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{nominee_name}" placeholder="ನಾಮಿನಿ ದಾರಾ ಹೆಸರು" required>
+							<input type="text" th:field="*{nm_father_name}" placeholder=" ನಾಮಿನಿ ತಂದೆಯ ಹೆಸರು" required>
+						</div>
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{nominee_relation}" placeholder="ಸದಸ್ಯ ಸಂಬಂಧ" required>
+							<input type="text" th:field="*{property_info}" placeholder="ಆಸ್ತಿ ಮಾಹಿತಿ" required>
+						</div>
+						<div class="col-md-6 agile_mail_grid_left">
+							<input type="text" th:field="*{member_type}" placeholder="ಸದಸ್ಯರ ವಿಧಾ" required>
+						</div>
+						
+						<div class="col-md-6 agile_mail_grid_left">
+							<select  class="form-control" th:field="*{rasu}"  required>
+							    <option th:value="'ಹಸು'" th:text="ಹಸು"></option>
+							    <option th:value="'ಎಮ್ಮೆ'" th:text="ಎಮ್ಮೆ"></option>
+							</select>
+						</div>
+					
+					
+						<div class="col-md-6 agile_mail_grid_left">
+							<select class="form-control" th:field="*{gender}"  required>
+							    <option th:value="'ಪುರುಷ'" th:text="ಪುರುಷ"></option>
+							    <option th:value="'ಮಹಿಳೆ'" th:text="ಮಹಿಳೆ"></option>
+							</select>
+						</div>	
+					
+						
+						<div class="clearfix"> </div>
+						<input type="submit" value="Submit Now">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- //mail -->
+<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>About Us</h3>
+				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<form action="#" method="post">
+					<input type="email" name="Email" placeholder="Email" required>
+					<input type="submit" value="Send">
+				</form>
+			</div>
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Twitter Posts</h3>
+				<ul class="w3agile_footer_grid_list">
+					<li>Ut aut reiciendis voluptatibus maiores <a href="#">http://lkj.ewr.com</a> alias, ut aut reiciendis.
+						<span>02 days ago</span></li>
+					<li>Itaque earum rerum hic tenetur a sapiente delectus <a href="#">http://uiubajaj.com</a> ut aut
+						voluptatibus.<span>03 days ago</span></li>
+				</ul>
+			</div>
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Social Media</h3>
+				<ul class="agileinfo_social_icons">
+					<li><a href="#" class="facebook"><span></span><i>-</i>Facebook</a></li>
+					<li><a href="#" class="twitter"><span></span><i>-</i>Twitter</a></li>
+					<li><a href="#" class="google"><span></span><i>-</i>Google+</a></li>
+					<li><a href="#" class="instagram"><span></span><i>-</i>Instagram</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+<!-- //footer -->
+<!-- copy-right -->
+	
+<!-- //copy-right -->
+<!-- for bootstrap working -->
+	<script src="js/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<!-- here stars scrolling icon -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			*/
+								
+			$().UItoTop({ easingType: 'easeOutQuart' });
+								
+			});
+	</script>
+<!-- //here ends scrolling icon -->
+</body>
+</html>
