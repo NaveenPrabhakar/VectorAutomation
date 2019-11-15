@@ -188,22 +188,26 @@ public class AppController {
 	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
 	public ModelAndView saveMolkCollection(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
 		milk_collectionservice.save(milk_collection);
-		modelAndView.addObject("confirmationMessage", "ಸದಸ್ಯರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		modelAndView.setViewName("milk_wizard");
 		return modelAndView;
 	}
 	@RequestMapping(value = "/view_milk_member", method = RequestMethod.POST)
-	public ModelAndView view_Milkmember(@ModelAttribute("member") Member member, ModelAndView modelAndView) {
+	public ModelAndView view_Milkmember(@ModelAttribute("milk_collection") Milk_Collection milk_Collection, ModelAndView modelAndView) {
 		ModelAndView mav = new ModelAndView("milk_wizard");
-		Boolean id_Exist = memberservice.is_Id_Exist(member.getId());
+		Boolean id_Exist = memberservice.is_Id_Exist(milk_Collection.getMember_id());
 		System.out.println("Bolean Value ---"+id_Exist);
 		if (id_Exist)
 		{
-		Member mem = memberservice.get(member.getId());
-		mav.addObject("listMember", mem);
+		Member mem = memberservice.get(milk_Collection.getMember_id());
+		Milk_Collection collection  = new Milk_Collection();
+		collection.setMember_id(mem.getId());
+		collection.setName(mem.getName());
+		mav.addObject("milk_collection", collection);
+		mav.addObject("member", mem);
 		}
 		else {
-			mav.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + member.getId());
+			mav.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + milk_Collection.getMember_id());
 		}
 		return mav;
 	}

@@ -18,28 +18,18 @@ public class Milk_Collection {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	public long milk_collection_id ;
-	public Date date;
+	public long member_id;
+	public String name ;
 	public String shift;
-	public String quantity;
+	public long quantity;
 	public long clr;
 	public long fat;
 	public long snf;
 	public long rate;
 	public String cattle_type;
-	public Date created_date;
-	public Date updated_date;
 	public long amount;
 	
-	@ManyToOne(
-	          fetch = FetchType.LAZY,
-	          optional = false
-	  )
-	  @JoinColumn(
-	          name = "member_id",
-	          nullable = false
-	  )
-	  @JsonIgnore
-	public Member member;
+	
 	
 	public Milk_Collection()
 	{
@@ -56,13 +46,7 @@ public class Milk_Collection {
 
 	
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
+	
 
 	public String getShift() {
 		return shift;
@@ -72,11 +56,11 @@ public class Milk_Collection {
 		this.shift = shift;
 	}
 
-	public String getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(String quantity) {
+	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
 
@@ -120,21 +104,7 @@ public class Milk_Collection {
 		this.cattle_type = cattle_type;
 	}
 
-	public Date getCreated_date() {
-		return created_date;
-	}
-
-	public void setCreated_date(Date created_date) {
-		this.created_date = created_date;
-	}
-
-	public Date getUpdated_date() {
-		return updated_date;
-	}
-
-	public void setUpdated_date(Date updated_date) {
-		this.updated_date = updated_date;
-	}
+	
 
 	public long getAmount() {
 		return amount;
@@ -144,20 +114,28 @@ public class Milk_Collection {
 		this.amount = amount;
 	}
 
-	public Member getMember() {
-		return member;
+	public long getMember_id() {
+		return member_id;
 	}
 
-	public void setMember(Member member) {
-		this.member = member;
+	public void setMember_id(long member_id) {
+		this.member_id = member_id;
 	}
 
-	public Milk_Collection(long milk_collection_id, long member_id, Date date, String shift, String quantity, long clr,
-			long fat, long snf, long rate, String cattle_type, Date created_date, Date updated_date, long amount,
-			Member member) {
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Milk_Collection(long milk_collection_id, long member_id, String name, String shift, long quantity,
+			long clr, long fat, long snf, long rate, String cattle_type, long amount) {
 		super();
 		this.milk_collection_id = milk_collection_id;
-		this.date = date;
+		this.member_id = member_id;
+		this.name = name;
 		this.shift = shift;
 		this.quantity = quantity;
 		this.clr = clr;
@@ -165,22 +143,18 @@ public class Milk_Collection {
 		this.snf = snf;
 		this.rate = rate;
 		this.cattle_type = cattle_type;
-		this.created_date = created_date;
-		this.updated_date = updated_date;
 		this.amount = amount;
-		this.member = member;
 	}
 
 	@Override
 	public String toString() {
-		return "Milk_Collection [milk_collection_id=" + milk_collection_id + ",  date="
-				+ date + ", shift=" + shift + ", quantity=" + quantity + ", clr=" + clr + ", fat=" + fat + ", snf="
-				+ snf + ", rate=" + rate + ", cattle_type=" + cattle_type + ", created_date=" + created_date
-				+ ", updated_date=" + updated_date + ", amount=" + amount + ", member=" + member + "]";
+		return "Milk_Collection [milk_collection_id=" + milk_collection_id + ", member_id=" + member_id + ", name="
+				+ name + ", shift=" + shift + ", quantity=" + quantity + ", clr=" + clr + ", fat=" + fat + ", snf="
+				+ snf + ", rate=" + rate + ", cattle_type=" + cattle_type + ", amount=" + amount + "]";
 	}
+
 	
-	
-	
+
 	
 	   
 	

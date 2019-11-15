@@ -12,4 +12,6 @@ public interface Milk_CollectionRepository extends JpaRepository<Milk_Collection
 	
 	@Query(value = "select * from milk_collection WHERE member_id = :member_id ",nativeQuery = true)
 	List<Milk_Collection> findByMemberId(@Param("member_id") long member_id);
+	
+	
 }
