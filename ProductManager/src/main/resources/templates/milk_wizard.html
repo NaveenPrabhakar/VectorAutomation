@@ -119,8 +119,7 @@ option {
 		<div class="">
 			<div th:if="${confirmationMessage}" class="alert alert-success"
 				role="alert" th:text=${confirmationMessage}></div>
-			<form action="#" th:action="@{/view_milk_member}"
-				th:object="${milk_collection}" method="post">
+			<form action="#" th:action="@{/view_milk_member}" th:object="${milk_collection}" method="post">
 				<div class="col-md-2">
 					<input type="text" class="form-control" th:field="*{member_id}"
 						placeholder="ಸದ್ಯಸರ ಸಂಖ್ಯೆ" required />
@@ -160,7 +159,7 @@ option {
 			<p th:text="#{milk.snf}"> </p> <input type="text" th:field="*{snf}"  class="form-control" >
 		</div>
 		<div class="col-md-2">
-			<p th:text="#{milk.rate}"> </p><input type="text" th:value="*{rate}" class="form-control" >
+			<p th:text="#{milk.rate}"> </p><input type="text" th:field="*{rate}" class="form-control" >
 		</div>
 		<div class="col-md-2">
 			<p th:text="#{milk.amount}"> </p> <input type="text" class="form-control" th:field="*{amount}">
@@ -204,11 +203,12 @@ option {
 					</thead>
 					<tbody>
 						 <tr th:each="milk : ${milk_member}">
-            	<td th:text="${milk.member.id}">Member ID</td>
-                <td th:text="${milk.shift}">Shift</td>
-                <td th:text="${milk.quantity}">Quantity</td>
-                <td th:text="${milk.fat}">Fat</td>
-                <td th:text="${milk.amount}">Amount</td>
+            	<td th:text="${milk.member_id}"></td>
+            	<td th:text="${milk.name}"></td>
+                <td th:text="${milk.shift}"></td>
+                <td th:text="${milk.quantity}"></td>
+                <td th:text="${milk.amount}"></td>
+                <td th:text="${milk.created_date}"></td>
                 
             </tr>
 					</tbody>

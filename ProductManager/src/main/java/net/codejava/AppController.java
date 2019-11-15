@@ -41,9 +41,9 @@ public class AppController {
 	
 	@RequestMapping("/milk_wizard")
     public String milk(Model model){
-		Member member = new Member();
+		//Member member = new Member();
 		Milk_Collection milk_Collection = new Milk_Collection();
-		model.addAttribute("member", member);
+		//model.addAttribute("member", member);
 		model.addAttribute("milk_collection", milk_Collection);
 		
         return "milk_wizard";
@@ -175,20 +175,14 @@ public class AppController {
 		
 	}
 	
-	@GetMapping("/milk_data")
-	public ModelAndView getdata()
-	{
-		System.out.println("INside milk data");
-		ModelAndView mav = new ModelAndView("milk_wizard");
-		List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(3);
-		mav.addObject("milk_member", milk);
-		return mav;
-	}
+	
 	
 	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
 	public ModelAndView saveMolkCollection(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
 		milk_collectionservice.save(milk_collection);
+		List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
 		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		modelAndView.addObject("milk_member", milk);
 		modelAndView.setViewName("milk_wizard");
 		return modelAndView;
 	}
@@ -200,9 +194,11 @@ public class AppController {
 		if (id_Exist)
 		{
 		Member mem = memberservice.get(milk_Collection.getMember_id());
+		List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_Collection.getMember_id());
 		Milk_Collection collection  = new Milk_Collection();
 		collection.setMember_id(mem.getId());
 		collection.setName(mem.getName());
+		mav.addObject("milk_member", milk);
 		mav.addObject("milk_collection", collection);
 		mav.addObject("member", mem);
 		}

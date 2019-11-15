@@ -21,13 +21,40 @@ public class Milk_Collection {
 	public long member_id;
 	public String name ;
 	public String shift;
-	public long quantity;
-	public long clr;
-	public long fat;
-	public long snf;
-	public long rate;
+	public double quantity;
+	public double clr;
+	public double fat;
+	public double snf;
+	public double rate;
 	public String cattle_type;
-	public long amount;
+	
+	public Milk_Collection(long milk_collection_id, long member_id, String name, String shift, double quantity,
+			double clr, double fat, double snf, double rate, String cattle_type, double amount, Date created_date) {
+		super();
+		this.milk_collection_id = milk_collection_id;
+		this.member_id = member_id;
+		this.name = name;
+		this.shift = shift;
+		this.quantity = quantity;
+		this.clr = clr;
+		this.fat = fat;
+		this.snf = snf;
+		this.rate = rate;
+		this.cattle_type = cattle_type;
+		this.amount = amount;
+		this.created_date = created_date;
+	}
+
+	public Date getCreated_date() {
+		return created_date;
+	}
+
+	public void setCreated_date(Date created_date) {
+		this.created_date = created_date;
+	}
+
+	public double amount;
+	public Date created_date; 
 	
 	
 	
@@ -56,43 +83,43 @@ public class Milk_Collection {
 		this.shift = shift;
 	}
 
-	public long getQuantity() {
+	public double getQuantity() {
 		return quantity;
 	}
 
-	public void setQuantity(long quantity) {
+	public void setQuantity(double quantity) {
 		this.quantity = quantity;
 	}
 
-	public long getClr() {
+	public double getClr() {
 		return clr;
 	}
 
-	public void setClr(long clr) {
+	public void setClr(double clr) {
 		this.clr = clr;
 	}
 
-	public long getFat() {
+	public double getFat() {
 		return fat;
 	}
 
-	public void setFat(long fat) {
+	public void setFat(double fat) {
 		this.fat = fat;
 	}
 
-	public long getSnf() {
+	public double getSnf() {
 		return snf;
 	}
 
-	public void setSnf(long snf) {
+	public void setSnf(double snf) {
 		this.snf = snf;
 	}
 
-	public long getRate() {
+	public double getRate() {
 		return rate;
 	}
 
-	public void setRate(long rate) {
+	public void setRate(double rate) {
 		this.rate = rate;
 	}
 
@@ -106,11 +133,11 @@ public class Milk_Collection {
 
 	
 
-	public long getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(long amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
@@ -130,27 +157,13 @@ public class Milk_Collection {
 		this.name = name;
 	}
 
-	public Milk_Collection(long milk_collection_id, long member_id, String name, String shift, long quantity,
-			long clr, long fat, long snf, long rate, String cattle_type, long amount) {
-		super();
-		this.milk_collection_id = milk_collection_id;
-		this.member_id = member_id;
-		this.name = name;
-		this.shift = shift;
-		this.quantity = quantity;
-		this.clr = clr;
-		this.fat = fat;
-		this.snf = snf;
-		this.rate = rate;
-		this.cattle_type = cattle_type;
-		this.amount = amount;
-	}
 
 	@Override
 	public String toString() {
 		return "Milk_Collection [milk_collection_id=" + milk_collection_id + ", member_id=" + member_id + ", name="
 				+ name + ", shift=" + shift + ", quantity=" + quantity + ", clr=" + clr + ", fat=" + fat + ", snf="
-				+ snf + ", rate=" + rate + ", cattle_type=" + cattle_type + ", amount=" + amount + "]";
+				+ snf + ", rate=" + rate + ", cattle_type=" + cattle_type + ", amount=" + amount + ", created_date="
+				+ created_date + "]";
 	}
 
 	
