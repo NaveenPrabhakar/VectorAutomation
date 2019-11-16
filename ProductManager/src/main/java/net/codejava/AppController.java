@@ -1,5 +1,6 @@
 package net.codejava;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -179,6 +180,8 @@ public class AppController {
 	
 	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
 	public ModelAndView saveMolkCollection(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		milk_collection.setCreated_date(timestamp);
 		milk_collectionservice.save(milk_collection);
 		List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
 		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");

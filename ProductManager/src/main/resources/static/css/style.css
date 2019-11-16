@@ -1061,13 +1061,13 @@ li.list-group-item1 {
 	margin-bottom: 1em;
     color:#212121;
 }
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+/* .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	border-top: none !important;
-}
-.tab-content > .active {
+} */
+/* .tab-content > .active {
 	display: block;
 	visibility: visible;
-}
+} */
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
 	z-index: 0;
 }
@@ -1093,23 +1093,23 @@ li.list-group-item1 {
 .bs-docs-example {
 	margin: 1em 0;
 }
-section#tables  p {
+/* section#tables  p {
 	margin-top: 1em;
-}
+} */
 .tab-container .tab-content {
 	border-radius: 0 2px 2px 2px;
 	border: 1px solid #e0e0e0;
 	padding: 16px;
 	background-color: #ffffff;
 }
-.table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+/* .table td, .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 	padding: 15px!important;
-}
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+} */
+/* .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
 	font-size: 0.9em;
 	color: #999;
 	border-top: none !important;
-}
+} */
 .tab-content > .active {
 	display: block;
 	visibility: visible;
@@ -1204,7 +1204,7 @@ h2.typoh2{
 	}
 }
 @media (max-width:480px){
-	.table h1 {
+	/* .table h1 {
 		font-size: 26px;
 	}
 	.table h2 {
@@ -1212,7 +1212,7 @@ h2.typoh2{
 	}
 	.table h3 {
 		font-size: 20px;
-	}
+	} */
 	.label {
 		font-size: 53%;
 	}
@@ -1250,12 +1250,13 @@ h2.typoh2{
 	.nav > li > a {
 		font-size: 14px;
 	}
-	table.table.table-striped,.table-bordered,.bs-docs-example {
+	/* table.table.table-striped,.table-bordered,.bs-docs-example {
 		display: none;
-	}
+	} */
 }
 /*--//Typography --*/
 /*-- blog --*/
+
 #demo,#demo1 {
     height: 435px;
 }
