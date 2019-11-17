@@ -28,9 +28,11 @@ public class Milk_Collection {
 	public double snf;
 	public double rate;
 	public String cattle_type;
+	public double amount;
+	public Date created_date; 
 	
 	public Milk_Collection(long milk_collection_id, long member_id, String name, String shift, double quantity,
-			double clr, double fat, double snf, double rate, String cattle_type, double amount, Timestamp created_date) {
+			double clr, double fat, double snf, double rate, String cattle_type, double amount, Date created_date) {
 		super();
 		this.milk_collection_id = milk_collection_id;
 		this.member_id = member_id;
@@ -46,16 +48,15 @@ public class Milk_Collection {
 		this.created_date = created_date;
 	}
 
-	public Timestamp getCreated_date() {
+	public Date getCreated_date() {
 		return created_date;
 	}
 
-	public void setCreated_date(Timestamp timestamp) {
-		this.created_date = timestamp;
+	public void setCreated_date(Date date) {
+		this.created_date = date;
 	}
 
-	public double amount;
-	public Timestamp created_date; 
+	
 	
 	
 	

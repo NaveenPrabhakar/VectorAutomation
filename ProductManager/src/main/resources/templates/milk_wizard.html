@@ -33,6 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	rel='stylesheet' type='text/css' />
 
 <script type="text/javascript" th:src="@{js/move-top.js}"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script type="text/javascript" th:src="@{js/easing.js}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
@@ -58,6 +59,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	});
 </script>
+<script type="text/javascript">
+$("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+        </script>
+        
+
 <style>
 table {
   border-collapse: collapse;
@@ -88,6 +100,29 @@ option {
 	/* Whatever color  you want */
 	background-color: #E4E5E6;
 }
+ fieldset 
+	{
+		border: 1px solid #ddd !important;
+		margin: 0;
+		xmin-width: 0;
+		padding: 10px;       
+		position: relative;
+		border-radius:4px;
+		background-color:#f5f5f5;
+		padding-left:10px!important;
+	}	
+	
+		legend
+		{
+			font-size:14px;
+			font-weight:bold;
+			margin-bottom: 0px; 
+			width: 35%; 
+			border: 1px solid #ddd;
+			border-radius: 4px; 
+			padding: 5px 5px 5px 10px; 
+			background-color: #ffffff;
+		}
 </style>
 
 </head>
@@ -150,6 +185,7 @@ option {
 		<div class="">
 			<div th:if="${confirmationMessage}" class="alert alert-success"
 				role="alert" th:text=${confirmationMessage}></div>
+				<fieldset > 
 			<form action="#" th:action="@{/view_milk_member}" th:object="${milk_collection}" method="post">
 				<div class="col-md-2">
 					<input type="text" class="form-control" th:field="*{member_id}"
@@ -157,9 +193,12 @@ option {
 				</div>
 				<input type="submit" class="btn btn-primary" value="ಹುಡುಕು " />
 			</form>
+			</fieldset>
 		</div>
 <div class="form-group row">
 </div>
+	<fieldset > 
+	<legend>Milk Collection </legend>
 		<form action="#" th:action="@{/save_milkCollection}" th:object="${milk_collection}" method="post">
 		
 		<div class="form-group row">
@@ -205,6 +244,11 @@ option {
 		<div class="col-md-2">
 			<p th:text="#{member.name}"> </p><input type="text" th:field="*{name}" class="form-control" readonly="readonly">
 		</div>
+		
+		<div class="col-md-3">
+		<p th:text="#{const.date}"> </p><input type="date" th:field="*{created_date}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" >
+		</div>
+		
 	</div>
 	<div class="form-group row">
 	<div class="col-md-2">
@@ -220,6 +264,47 @@ option {
 		<input type="submit" class="btn btn-primary" value="submit " />
 	</div>
 		</form>
+		</fieldset>
+	<br>
+	<br>	
+<fieldset > 
+	<legend>Local Sale</legend>
+	<form action="#" th:action="@{/local_sale}" th:object="${localsale}" method="post">
+	
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{bill.number}"> </p><input type="text" th:value="*{bill_number}" class="form-control" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.quantity}"> </p><input type="text" th:field="*{quantity}" class="form-control" >
+		</div>
+		
+		<div class="col-md-3">
+		<p th:text="#{const.date}"> </p><input type="date" th:field="*{created_date}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" >
+		</div>
+		
+	</div>
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{milk.stock}"> </p><input type="text" th:field="*{available_milk}" class="form-control" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.amount}"> </p><input type="text" th:field="*{amount}" class="form-control" >
+		</div>
+		
+		<div class="col-md-2">
+			<p th:text="#{milk.shift}"> </p><select class="form-control" th:field="*{shift}" id="sel1">
+							    <option th:value="'ಬೆಳಗ್ಗೆ'" th:text="#{milk.morning}">></option>
+							    <option th:value="'ಸಂಜೆ'" th:text="#{milk.evenin}">></option> </select>
+		</div>
+			<div class="col-md-2">
+		<input type="submit" class="btn btn-primary" value="submit " />
+		</div>
+	</div>
+	
+	</form>
+	
+	</fieldset>		
 	<div class="bs-docs-example">
 				<table class="table-bordered">
 					<thead >
@@ -275,6 +360,7 @@ option {
 
 
 	<script th:src="@{js/bootstrap.js}"></script>
+	
 
 	<script type="text/javascript">
 		$(document).ready(function() {
