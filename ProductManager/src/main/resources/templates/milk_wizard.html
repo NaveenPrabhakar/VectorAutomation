@@ -139,28 +139,37 @@ option {
 						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
 
 
-							<li><a href=""><p th:text="#{menu.master}"></p></a></li>
-
+							<li><a href=""><p th:text="#{menu.master}"> </p></a></li>
+							
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-expanded="true"><span
-									class=""><p th:text="#{menu.member}"></p></span> </a>
+								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.member}"> </p></span>
+							</a>
 								<ul class="dropdown-menu" role="menu">
-									<li><a th:href="@{/add_member}"><p
-												th:text="#{menu.addmember}"></p></a></li>
+									<li><a th:href="@{/add_member}"><p th:text="#{menu.addmember}"> </p></a></li>
 									<li class="divider"></li>
-									<li><a th:href="@{/view_member}"><p
-												th:text="#{menu.viewmember}"></p></a></li>
+									<li><a th:href="@{/view_member}"><p th:text="#{menu.viewmember}"> </p></a></li>
 								</ul></li>
-							<li><a href="blog.html"><p th:text="#{menu.ratechart}">
-									</p></a></li>
-							<li><a href="short-codes.html"><p
-										th:text="#{menu.goodsmaster}"></p></a></li>
-							<li><a href="mail.html"><p th:text="#{menu.exit}"></p></a></li>
-							<li><select class="select" role="menu" id="locales">
-									<option deselected th:text="#{language.change}"></option>
-									<option value="en" th:text="#{lang.eng}"></option>
-									<option value="de" th:text="#{lang.de}"></option>
-							</select></li>
+								
+								
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.milk}"> </p></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/milk_wizard}"><p th:text="#{menu.milk}"> </p></a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/local_sale}"><p th:text="#{menu.localsale}"> </p></a></li>
+								</ul></li>
+								
+							<li><a href="blog.html"><p th:text="#{menu.ratechart}"> </p></a></li>
+							<li><a href="short-codes.html"><p th:text="#{menu.goodsmaster}"> </p></a></li>
+							<li><a href="mail.html"><p th:text="#{menu.exit}"> </p></a></li>
+							<li> 
+							<select class="select" role="menu" id="locales">
+    <option deselected th:text="#{language.change}"></option>
+    <option  value="en"  th:text="#{lang.eng}"></option>
+    <option   value="de" th:text="#{lang.de}"></option>
+</select>  
+							</li>
 						</ul>
 					</nav>
 				</div>
@@ -265,46 +274,7 @@ option {
 	</div>
 		</form>
 		</fieldset>
-	<br>
-	<br>	
-<fieldset > 
-	<legend>Local Sale</legend>
-	<form action="#" th:action="@{/local_sale}" th:object="${localsale}" method="post">
 	
-	<div class="form-group row">
-	<div class="col-md-2">
-			<p th:text="#{bill.number}"> </p><input type="text" th:value="*{bill_number}" class="form-control" >
-		</div>
-		<div class="col-md-2">
-			<p th:text="#{milk.quantity}"> </p><input type="text" th:field="*{quantity}" class="form-control" >
-		</div>
-		
-		<div class="col-md-3">
-		<p th:text="#{const.date}"> </p><input type="date" th:field="*{created_date}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" >
-		</div>
-		
-	</div>
-	<div class="form-group row">
-	<div class="col-md-2">
-			<p th:text="#{milk.stock}"> </p><input type="text" th:field="*{available_milk}" class="form-control" >
-		</div>
-		<div class="col-md-2">
-			<p th:text="#{milk.amount}"> </p><input type="text" th:field="*{amount}" class="form-control" >
-		</div>
-		
-		<div class="col-md-2">
-			<p th:text="#{milk.shift}"> </p><select class="form-control" th:field="*{shift}" id="sel1">
-							    <option th:value="'ಬೆಳಗ್ಗೆ'" th:text="#{milk.morning}">></option>
-							    <option th:value="'ಸಂಜೆ'" th:text="#{milk.evenin}">></option> </select>
-		</div>
-			<div class="col-md-2">
-		<input type="submit" class="btn btn-primary" value="submit " />
-		</div>
-	</div>
-	
-	</form>
-	
-	</fieldset>		
 	<div class="bs-docs-example">
 				<table class="table-bordered">
 					<thead >

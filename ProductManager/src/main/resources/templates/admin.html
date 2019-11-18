@@ -130,8 +130,16 @@ img {
 									<li><a th:href="@{/view_member}"><p
 												th:text="#{menu.viewmember}"></p></a></li>
 								</ul></li>
-							<li><a th:href="@{/milk_wizard}"><p
-										th:text="#{menu.milk}"></p></a></li>
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.milk}"> </p></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/milk_wizard}"><p th:text="#{menu.milk}"> </p></a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/local_sale}"><p th:text="#{menu.localsale}"> </p></a></li>
+								</ul></li>
+										
+										
 							<li><a href="blog.html"><p th:text="#{menu.ratechart}">
 									</p></a></li>
 							<li><a href="short-codes.html"><p

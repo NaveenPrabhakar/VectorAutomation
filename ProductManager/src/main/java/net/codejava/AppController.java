@@ -53,14 +53,21 @@ public class AppController {
 	@RequestMapping("/milk_wizard")
     public String milk(Model model){
 		Milk_Collection milk_Collection = new Milk_Collection();
+		//model.addAttribute("member", member);
+		model.addAttribute("milk_collection", milk_Collection);
+        return "milk_wizard";
+    }
+	
+	@RequestMapping("/local_sale")
+	public String viewLocalsale(Model model)
+	{
 		LocalSale localSale = new LocalSale();
 		long maxBillNumber = localSaleService.findMaxBillNumber();
 		localSale.setBill_number(maxBillNumber);
-		//model.addAttribute("member", member);
-		model.addAttribute("milk_collection", milk_Collection);
 		model.addAttribute("localsale", localSale);
-        return "milk_wizard";
-    }
+		return "localsale";
+		
+	}
 	
 	@RequestMapping("/logout")
 	public ModelAndView viewLogoutPage(Model model) {
@@ -211,6 +218,7 @@ public class AppController {
 		collection.setName(mem.getName());
 		mav.addObject("milk_member", milk);
 		mav.addObject("milk_collection", collection);
+		
 		mav.addObject("member", mem);
 		}
 		else {
@@ -221,8 +229,10 @@ public class AppController {
 	
 	@RequestMapping(value = "/local_sale", method = RequestMethod.POST)
 	public ModelAndView save_Localsale(@ModelAttribute("localsale") LocalSale localSale, ModelAndView modelAndView) {
+		Milk_Collection collection  = new Milk_Collection();
 		ModelAndView mav = new ModelAndView("milk_wizard");
 		localSaleService.save(localSale);
+		mav.addObject("milk_collection", collection);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		return mav;
 	}
