@@ -220,4 +220,20 @@ public void setPhone_number(String phone_number) {
 }
 
 
+
+
+
+
+@Override
+public String toString() {
+	return "Member [id=" + id + ", name=" + name + ", name_en=" + name_en + ", father_name=" + father_name
+			+ ", father_name_en=" + father_name_en + ", address=" + address + ", adhar_number=" + adhar_number
+			+ ", pan_number=" + pan_number + ", account_number=" + account_number + ", bank_name=" + bank_name
+			+ ", branch=" + branch + ", ifse=" + ifse + ", email=" + email + ", rasu=" + rasu + ", pangada=" + pangada
+			+ ", pangada2=" + pangada2 + ", member_type=" + member_type + ", nominee_name=" + nominee_name
+			+ ", nominee_relation=" + nominee_relation + ", property_info=" + property_info + ", nm_father_name="
+			+ nm_father_name + ", gender=" + gender + ", phone_number=" + phone_number + "]";
+}
+
+
 }

@@ -191,55 +191,132 @@ option {
 	<br>
 	
 	<div class="container">
-	<div th:if="${confirmationMessage}" class="alert alert-success"
+		<div class="">
+		
+		 <div th:if="${confirmationMessage}" class="alert alert-success"
 				role="alert" th:text=${confirmationMessage}></div> 
-				<br>	
-<fieldset > 
-	<legend>Local Sale</legend>
-	<form action="#" th:action="@{/local_sale}" th:object="${localsale}" method="post">
+				
+		</div>
+<div class="form-group row">
+</div>
+	<fieldset > 
+	<legend>Milk Collection </legend>
+		<form action="#" th:action="@{/save_EditMilk}" th:object="${milk_collection}" method="post">
+		
+		<div class="form-group row">
+		
+		 <div class="col-md-2">
+			<p th:text="#{milk.quantity}"> </p> <input type="text" class="form-control" th:field="*{quantity}">
+		</div> 
+		<div class="form-group row">
+		
+		 <div class="col-md-2">
+			<p th:text="#{milk.id}"> </p> <input type="text" class="form-control" th:field="*{milk_collection_id}">
+		</div> 
+		
+		
+
+	</div>
+	
 	
 	<div class="form-group row">
 	<div class="col-md-2">
-			<p th:text="#{bill.number}"> </p><input type="text" th:value="*{bill_number}" class="form-control" >
+			<p th:text="#{milk.fat}"> </p><input type="text" th:field="*{fat}" class="form-control" required="required">
 		</div>
 		<div class="col-md-2">
-			<p th:text="#{milk.quantity}"> </p><input type="text" th:field="*{quantity}" class="form-control" >
+			<p th:text="#{milk.snf}"> </p> <input type="text" th:field="*{snf}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.rate}"> </p><input type="text" th:field="*{rate}" class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.amount}"> </p> <input type="text" class="form-control" th:field="*{amount}" required="required">
+		</div>
+	
+	</div>
+
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.id}"> </p><input type="text" th:field="*{member_id}" class="form-control" readonly="readonly" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.name}"> </p><input type="text" th:field="*{name}" class="form-control" readonly="readonly" required="required">
 		</div>
 		
 		<div class="col-md-3">
-		<p th:text="#{const.date}"> </p><input type="date" th:field="*{created_date}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" >
+		<p th:text="#{const.date}"> </p><input type="date" th:field="*{created_date}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" required="required">
 		</div>
 		
 	</div>
 	<div class="form-group row">
 	<div class="col-md-2">
-			<p th:text="#{milk.stock}"> </p><input type="text" th:field="*{available_milk}" class="form-control" >
-		</div>
-		<div class="col-md-2">
-			<p th:text="#{milk.amount}"> </p><input type="text" th:field="*{amount}" class="form-control" >
-		</div>
-		
-		<div class="col-md-2">
-			<p th:text="#{milk.shift}"> </p><select class="form-control" th:field="*{shift}" id="sel1">
+			<p th:text="#{milk.shift}"> </p><select class="form-control" th:field="*{shift}" id="sel1" required="required">
 							    <option th:value="'ಬೆಳಗ್ಗೆ'" th:text="#{milk.morning}">></option>
 							    <option th:value="'ಸಂಜೆ'" th:text="#{milk.evenin}">></option> </select>
 		</div>
-			<div class="col-md-2">
+		<div class="col-md-2">
+			<p th:text="#{member.rasu}"> </p><select class="form-control" th:field="*{cattle_type}" id="sel1" required="required">
+								<option th:value="'ಹಸು'" th:text="#{member.cow}"></option>
+							    <option th:value="'ಎಮ್ಮೆ'" th:text="#{member.buffalo}"></option></select>
+		</div>
 		<input type="submit" class="btn btn-primary" value="submit " />
+	</div>
+		</form>
+		</fieldset>
+	
+	<div class="bs-docs-example">
+				<table class="table-bordered">
+					<thead >
+						<tr>
+							<th> ಸಂಖ್ಯೆ</th>
+							<th>ಸದಸ್ಯರ ಹೆಸರುe</th>
+							<th>ದೂರವಾಣಿ ಸಂಖ್ಯೆ</th>
+							<th>ರಾಸು</th>
+							<th>ಅಧಾರ್ ಸಂಖ್ಯೆ</th>
+							<th>ಸದಸ್ಯರನ್ನು ಮಾರ್ಪಡಿಸಿ</th>
+						</tr>
+					</thead>
+					<tbody>
+						 <tr th:each="milk : ${milk_member}">
+            	<td th:text="${milk.member_id}"></td>
+            	<td th:text="${milk.name}"></td>
+                <td th:text="${milk.shift}"></td>
+                <td th:text="${milk.quantity}"></td>
+                <td th:text="${milk.amount}"></td>
+                <td th:text="${milk.created_date}"></td>
+                
+            </tr>
+					</tbody>
+				</table>
+			</div>
+	
+	
+	</div>
+
+	<!-- <div class="footer">
+		<div class="container">
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Vector Automation</h3>
+
+				<form action="#" method="post">
+					<input type="email" name="Email" placeholder="Email" required />
+					<input type="submit" value="Send" />
+				</form>
+			</div>
+
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Social Media</h3>
+				<ul class="agileinfo_social_icons">
+					<li><a href="#" class="facebook"><span></span><i>-</i>Facebook</a></li>
+					<li><a href="#" class="twitter"><span></span><i>-</i>Twitter</a></li>
+					<li><a href="#" class="google"><span></span><i>-</i>Google+</a></li>
+					<li><a href="#" class="instagram"><span></span><i>-</i>Instagram</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
-	
-	</form>
-	
-	</fieldset>		
-		
+ -->
 
-	
-	
-	
-	</div>
-
-	
 
 	<script th:src="@{js/bootstrap.js}"></script>
 	
