@@ -25,6 +25,7 @@ import ch.qos.logback.classic.Logger;
 public class AppController {
 	
 	public static org.slf4j.Logger log = LoggerFactory.getLogger(AppController.class);
+	LocalDate created_date = LocalDate.now();
 
 	@Autowired
 	private ProductService service;
@@ -63,11 +64,16 @@ public class AppController {
 	@RequestMapping("/milk_wizard")
     public String milk(Model model){
 		log.info("Milk Wizard  Page is involked");
-		LocalDate created_date = LocalDate.now();
 		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		log.info("Todays date is -"+created_date);
+		double milk_quantity = milk_collectionservice.getMilkData(created_date);
+		double local_quantity = localSaleService.local_quantity(created_date);
+		double current_milk = milk_quantity - local_quantity;
+		log.info("milkvalue - "+milk_quantity+"local - "+local_quantity+"diff - "+current_milk);
+		model.addAttribute("milkquantity", milk_quantity);
+		model.addAttribute("localquantity", local_quantity);
+		model.addAttribute("totalquantity", current_milk);
 		Milk_Collection milk_Collection = new Milk_Collection();
-		//model.addAttribute("member", member); ${milk_member}
 		model.addAttribute("milk_collection", milk_Collection);
 		model.addAttribute("milk_member", collections);
         return "milk_wizard";
@@ -236,7 +242,7 @@ public class AppController {
 		if(id_Exist) {
 			if(count == 0) {
 		milk_collectionservice.save(milk_collection);
-		LocalDate created_date = LocalDate.now();
+	//	LocalDate created_date = LocalDate.now();
 		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		//List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
 		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
@@ -244,6 +250,8 @@ public class AppController {
 		modelAndView.setViewName("milk_wizard");
 		return modelAndView;}
 			else {
+				List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
+				modelAndView.addObject("milk_member", collections);
 				modelAndView.addObject("confirmationMessage", "ಈ ಶಿಫ್ಟ್‌ನಲ್ಲಿ ಸದಸ್ಯ ಈಗಾಗಲೇ ಹಾಲು ಸೇರಿಸಿದ್ದಾರೆ");
 				modelAndView.setViewName("milk_wizard");
 				return modelAndView;
@@ -265,7 +273,7 @@ public class AppController {
 		{
 		Member mem = memberservice.get(milk_Collection.getMember_id());
 		log.info("Member Details  - "+mem.toString());
-		LocalDate created_date = LocalDate.now();
+		//LocalDate created_date = LocalDate.now();
 		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		Milk_Collection collection  = new Milk_Collection();
 		collection.setMember_id(mem.getId());
@@ -295,13 +303,28 @@ public class AppController {
 	@RequestMapping(value = "/save_EditMilk", method = RequestMethod.POST)
 	public ModelAndView saveEditMilk(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
 		milk_collectionservice.save(milk_collection);
-		LocalDate created_date = LocalDate.now();
+		//LocalDate created_date = LocalDate.now();
 		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		modelAndView.setViewName("milk_wizard");
 		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಮಾರ್ಪಡಿಸಲಾಗಿದೆ");
 		modelAndView.addObject("milk_member", collections);
 		return modelAndView;
 	
+	}
+	
+	@RequestMapping("/delete_milkdata/{milk_collection_id}")
+	public ModelAndView delete_MilkData(@PathVariable(name = "milk_collection_id") int milk_collection_id,@ModelAttribute("milk") Milk_Collection collection) {
+		log.info("ID  -- - -"+milk_collection_id);
+		log.info("/delete_milkdata Controller is invoked and id is -  "+collection.toString());
+		milk_collectionservice.deleteById(milk_collection_id);
+		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		//Milk_Collection milk = new Milk_Collection();
+		ModelAndView mav = new ModelAndView("milk_wizard");
+		mav.addObject("confirmationMessage", "ಸದಸ್ಯರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ " );
+		mav.addObject("milk_collection", collection);
+		mav.addObject("milk_member", collections);
+		return mav;
+		
 	}
 	
 	

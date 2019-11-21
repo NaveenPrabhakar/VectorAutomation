@@ -1,5 +1,7 @@
 package net.codejava;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,5 +21,8 @@ public class LocalSaleService {
 	{
 		repo.save(localSale);
 	}
-
+	public double local_quantity(LocalDate created_date)
+	{
+		return repo.totalquantity(created_date);
+	}
 }

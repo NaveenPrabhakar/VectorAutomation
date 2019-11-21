@@ -123,6 +123,46 @@ option {
 			padding: 5px 5px 5px 10px; 
 			background-color: #ffffff;
 		}
+		.card1 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: rgba(255,0,0);
+	color: white;
+	align:center;
+	
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+.card2 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: rgba(0,255,0);
+	color: white;
+	align:center;
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+.card3 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: rgba(0,0,255);
+	color: white;
+	align:center;
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+img {
+	border-radius: 5px 5px 0 0;
+}
+
+.container {
+	padding: 2px 16px;
+}
 </style>
 
 </head>
@@ -224,8 +264,9 @@ option {
 		</div>
 
 		<div class="col-md-2">
+		
 			 </p><span class="btn btn-primary" onclick="update($(this));"><span
-				class="glyphicon glyphicon-refresh" aria-hidden="true"></span> <p th:text="#{const.reset}"> </p></span>
+				class="glyphicon glyphicon-refresh" aria-hidden="true"></span> <p th:text="#{const.reset}"> </p></span> 
 		</div>
 
 	</div>
@@ -275,6 +316,40 @@ option {
 	</div>
 		</form>
 		</fieldset>
+		<br>
+		<br>
+		<div class="row">
+		<div class="col-md-3">
+			<div class="card1">
+				<div class="container">
+					<h4 class="alert">
+						<b class ="card-header">Total Milk Collection</b>
+					</h4>
+					<h2><p th:text=${milkquantity}></p></h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card2">
+				<div class="container">
+					<h4 class="alert">
+						<b class ="card-header">Total Local Sale</b>
+					</h4>
+					<h2><p th:text=${localquantity}></p></h2>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="card3">
+				<div class="container">
+					<h4 class="alert">
+						<b class ="card-header">Remaining Milk</b>
+					</h4>
+					<h1><p th:text=${totalquantity}></p></h1>
+				</div>
+			</div>
+		</div>
+		</div>
 	
 	<div class="bs-docs-example">
 				<table class="table-bordered">
@@ -301,7 +376,7 @@ option {
                 <td>
                 	<a th:href="@{'/edit_milk/' + ${milk.milk_collection_id}}"><span class="label label-warning">Edit</span></a>
                 	&nbsp;&nbsp;&nbsp;
-                	<a th:href="@{'/delete_milk/' + ${milk.milk_collection_id}}"><span class="label label-danger">Delete</span></a> 
+                	<a th:href="@{'/delete_milkdata/' + ${milk.milk_collection_id}}"><span class="label label-danger">Delete</span></a> 
                 </td>
                 
             </tr>

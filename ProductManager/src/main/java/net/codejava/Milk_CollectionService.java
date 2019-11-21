@@ -44,5 +44,15 @@ public class Milk_CollectionService {
 		 return  (int) repo.check_id(member_id, shift, created_date);
 		 
 	 }
+	 
+	 public void deleteById(long milk_collection_id)
+	 {
+		 repo.deleteById(milk_collection_id);
+	 }
+	 
+	 public double getMilkData(LocalDate created_date)
+	 {
+		return  repo.tottalQuanity(created_date);
+	 }
 
 }

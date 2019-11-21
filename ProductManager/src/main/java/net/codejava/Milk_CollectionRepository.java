@@ -23,4 +23,10 @@ public interface Milk_CollectionRepository extends JpaRepository<Milk_Collection
 	List<Milk_Collection> todaysCollection(LocalDate created_date);
 	
 	
+	@Query(value = "select sum(quantity) from milk_collection where created_date=:created_date",nativeQuery = true)
+	double tottalQuanity(LocalDate created_date);
+	 
+	
+	
+	
 }
