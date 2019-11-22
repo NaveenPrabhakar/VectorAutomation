@@ -14,7 +14,7 @@ public interface LocalSaleRepo extends JpaRepository<LocalSale, Long> {
 	public long findByMaxBillNumber();
 	
 	@Query(value = "select sum(quantity) from localsale where created_date =:created_date",nativeQuery = true)
-	public double totalquantity(LocalDate created_date);
+	public Double totalquantity(LocalDate created_date);
 	
 
 }

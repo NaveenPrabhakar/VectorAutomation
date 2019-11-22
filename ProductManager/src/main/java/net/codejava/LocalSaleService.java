@@ -21,7 +21,7 @@ public class LocalSaleService {
 	{
 		repo.save(localSale);
 	}
-	public double local_quantity(LocalDate created_date)
+	public Double local_quantity(LocalDate created_date)
 	{
 		return repo.totalquantity(created_date);
 	}

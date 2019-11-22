@@ -129,53 +129,7 @@ option {
 
 <body>
 
-	<div class="top-nav">
-		<div class="container">
-			<nav class="navbar navbar-default">
-
-				<div class="collapse navbar-collapse navbar-right"
-					id="bs-example-navbar-collapse-1">
-					<nav class="menu menu--shylock">
-						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
-
-
-							<li><a href=""><p th:text="#{menu.master}"> </p></a></li>
-							
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.member}"> </p></span>
-							</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a th:href="@{/add_member}"><p th:text="#{menu.addmember}"> </p></a></li>
-									<li class="divider"></li>
-									<li><a th:href="@{/view_member}"><p th:text="#{menu.viewmember}"> </p></a></li>
-								</ul></li>
-								
-								
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.milk}"> </p></span>
-							</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a th:href="@{/milk_wizard}"><p th:text="#{menu.milk}"> </p></a></li>
-									<li class="divider"></li>
-									<li><a th:href="@{/local_sale}"><p th:text="#{menu.localsale}"> </p></a></li>
-								</ul></li>
-								
-							<li><a href="blog.html"><p th:text="#{menu.ratechart}"> </p></a></li>
-							<li><a href="short-codes.html"><p th:text="#{menu.goodsmaster}"> </p></a></li>
-							<li><a href="mail.html"><p th:text="#{menu.exit}"> </p></a></li>
-							<li> 
-							<select class="select" role="menu" id="locales">
-    <option deselected th:text="#{language.change}"></option>
-    <option  value="en"  th:text="#{lang.eng}"></option>
-    <option   value="de" th:text="#{lang.de}"></option>
-</select>  
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</nav>
-		</div>
-	</div>
+	<th:block th:include="navbar"></th:block>
 	<div class="agileits_breadcrumbs">
 		<div class="container">
 			<div class="agileits_breadcrumbs_left">
@@ -217,7 +171,7 @@ option {
 	<div class="form-group row">
 	
 		<div class="col-md-2">
-			<p th:text="#{bank.pincode}"> </p><input type="text" th:field="*{pincode}" class="form-control" >
+			<p th:text="#{bank.pin}"> </p><input type="text" th:field="*{pincode}" class="form-control" >
 		</div>
 		
 		<div class="col-md-2">

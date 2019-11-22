@@ -50,7 +50,7 @@ public class Milk_CollectionService {
 		 repo.deleteById(milk_collection_id);
 	 }
 	 
-	 public double getMilkData(LocalDate created_date)
+	 public Double getMilkData(LocalDate created_date)
 	 {
 		return  repo.tottalQuanity(created_date);
 	 }

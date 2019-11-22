@@ -65,23 +65,7 @@ public class AppController {
 	
 	
 	
-	@RequestMapping("/milk_wizard")
-    public String milk(Model model){
-		log.info("Milk Wizard  Page is involked");
-		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
-		log.info("Todays date is -"+created_date);
-		double milk_quantity = milk_collectionservice.getMilkData(created_date);
-		double local_quantity = localSaleService.local_quantity(created_date);
-		double current_milk = milk_quantity - local_quantity;
-		log.info("milkvalue - "+milk_quantity+"local - "+local_quantity+"diff - "+current_milk);
-		model.addAttribute("milkquantity", milk_quantity);
-		model.addAttribute("localquantity", local_quantity);
-		model.addAttribute("totalquantity", current_milk);
-		Milk_Collection milk_Collection = new Milk_Collection();
-		model.addAttribute("milk_collection", milk_Collection);
-		model.addAttribute("milk_member", collections);
-        return "milk_wizard";
-    }
+	
 	
 	@RequestMapping("/local_sale")
 	public String viewLocalsale(Model model)
@@ -237,35 +221,99 @@ public class AppController {
 		
 	}
 	
+	@RequestMapping("/milk_wizard")
+    public String milk(Model model){
+		log.info("Milk Wizard  Page is involked");
+		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		log.info("Todays date is -"+created_date);
+		Double milk_quantity = milk_collectionservice.getMilkData(created_date);
+		log.info("milk"+milk_quantity);
+		Double local_quantity = localSaleService.local_quantity(created_date);
+		log.info("local"+local_quantity);
+		if(milk_quantity !=null && local_quantity!=null )
+		{
+		double current_milk = milk_quantity - local_quantity;
+		log.info("milkvalue - "+milk_quantity+"local - "+local_quantity+"diff - "+current_milk);
+		model.addAttribute("milkquantity", milk_quantity);
+		model.addAttribute("localquantity", local_quantity);
+		model.addAttribute("totalquantity", current_milk);
+		Milk_Collection milk_Collection = new Milk_Collection();
+		model.addAttribute("milk_collection", milk_Collection);
+		model.addAttribute("milk_member", collections);
+        return "milk_wizard";
+		}
+		else {
+		model.addAttribute("milkquantity", 0);
+		model.addAttribute("localquantity", 0);
+		model.addAttribute("totalquantity", 0);
+		Milk_Collection milk_Collection = new Milk_Collection();
+		model.addAttribute("milk_collection", milk_Collection);
+		model.addAttribute("milk_member", collections);
+        return "milk_wizard";}
+    }
+	
 	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
 	public ModelAndView saveMolkCollection(@ModelAttribute("milk_collection") Milk_Collection milk_collection, ModelAndView modelAndView) {
 		log.info("Save MilkCollection controller is Invoked - "+milk_collection.toString());
 		int count = milk_collectionservice.check_duplicate_ShiftEntry(milk_collection.getMember_id(), milk_collection.getShift(), milk_collection.getCreated_date());
 		log.info("Member count in this shift - "+count);
+		
+		
+		
 		Boolean id_Exist = memberservice.is_Id_Exist(milk_collection.getMember_id());
-		if(id_Exist) {
+		if(id_Exist) 
+		{
 			if(count == 0) {
-		milk_collectionservice.save(milk_collection);
-	//	LocalDate created_date = LocalDate.now();
-		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
-		//List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
-		modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
-		modelAndView.addObject("milk_member", collections);
-		modelAndView.setViewName("milk_wizard");
-		return modelAndView;}
+					milk_collectionservice.save(milk_collection);
+				//	LocalDate created_date = LocalDate.now();
+					List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
+					//List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
+					modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+					modelAndView.addObject("milk_member", collections);
+					modelAndView.setViewName("milk_wizard");
+					
+							}
 			else {
-				List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
-				modelAndView.addObject("milk_member", collections);
-				modelAndView.addObject("confirmationMessage", "ಈ ಶಿಫ್ಟ್‌ನಲ್ಲಿ ಸದಸ್ಯ ಈಗಾಗಲೇ ಹಾಲು ಸೇರಿಸಿದ್ದಾರೆ");
-				modelAndView.setViewName("milk_wizard");
-				return modelAndView;
-			}
+					List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
+					modelAndView.addObject("milk_member", collections);
+					modelAndView.addObject("confirmationMessage", "ಈ ಶಿಫ್ಟ್‌ನಲ್ಲಿ ಸದಸ್ಯ ಈಗಾಗಲೇ ಹಾಲು ಸೇರಿಸಿದ್ದಾರೆ");
+					modelAndView.setViewName("milk_wizard");
+					
+				}
 		}
 		else {
 			modelAndView.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ");
 			modelAndView.setViewName("milk_wizard");
-			return modelAndView;
+			
 		}
+		
+		Double milk_quantity = milk_collectionservice.getMilkData(created_date);
+		log.info("milk"+milk_quantity);
+		Double local_quantity = localSaleService.local_quantity(created_date);
+		log.info("local"+local_quantity);
+		if(milk_quantity !=null && local_quantity!=null )
+		{
+		double current_milk = milk_quantity - local_quantity;
+		log.info("milkvalue - "+milk_quantity+"local - "+local_quantity+"diff - "+current_milk);
+		modelAndView.addObject("milkquantity", milk_quantity);
+		modelAndView.addObject("localquantity", local_quantity);
+		modelAndView.addObject("totalquantity", current_milk);
+		Milk_Collection milk_Collection = new Milk_Collection();
+		modelAndView.addObject("milk_collection", milk_Collection);
+		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		modelAndView.addObject("milk_member", coll);
+		return modelAndView;
+		}
+		else {
+			modelAndView.addObject("milkquantity", 0);
+			modelAndView.addObject("localquantity", 0);
+			modelAndView.addObject("totalquantity", 0);
+		Milk_Collection milk_Collection = new Milk_Collection();
+		modelAndView.addObject("milk_collection", milk_Collection);
+		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		modelAndView.addObject("milk_member", coll);
+		return modelAndView;
+       }
 	}
 	@RequestMapping(value = "/view_milk_member", method = RequestMethod.POST)
 	public ModelAndView view_Milkmember(@ModelAttribute("milk_collection") Milk_Collection milk_Collection, ModelAndView modelAndView) {

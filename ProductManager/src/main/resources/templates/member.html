@@ -4,213 +4,257 @@
 <title>Vector Automation</title>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+<meta name="keywords"
+	content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
-
-<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
-<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css" media="screen" property="" />
-
-<script type="text/javascript"  th:src="@{js/jquery-2.1.4.min.js}"></script>
-
-<link href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700' rel='stylesheet' type='text/css' />
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css' />
-
-<script type="text/javascript"  th:src="@{js/move-top.js}"></script>
-<script type="text/javascript"  th:src="@{js/easing.js}"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
+<script type="application/x-javascript">
 	
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 </script>
+
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css"
+	media="screen" property="" />
+
+<script type="text/javascript" th:src="@{js/jquery-2.1.4.min.js}"></script>
+
+<link
+	href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700'
+	rel='stylesheet' type='text/css' />
+<link
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	rel='stylesheet' type='text/css' />
+
+<script type="text/javascript" th:src="@{js/move-top.js}"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" th:src="@{js/easing.js}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+		
+		$(function() {
+			  $("#member_id").focus();
+			});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#locales").change(function() {
+			var selectedOption = $('#locales').val();
+			if (selectedOption != '') {
+				window.location.replace('?lang=' + selectedOption);
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+$("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+        </script>
+        
+
 <style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #337ab7;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
 .dropdown-menu {
 	background-color: transparent;
 }
+
+.select {
+	color: #ffffff;
+	background-color: transparent;
+}
+
+option {
+	/* Whatever color  you want */
+	background-color: #E4E5E6;
+}
+ fieldset 
+	{
+		border: 1px solid #ddd !important;
+		margin: 0;
+		xmin-width: 0;
+		padding: 10px;       
+		position: relative;
+		border-radius:4px;
+		background-color:#f5f5f5;
+		padding-left:10px!important;
+	}	
+	
+		legend
+		{
+			font-size:14px;
+			font-weight:bold;
+			margin-bottom: 0px; 
+			width: 35%; 
+			border: 1px solid #ddd;
+			border-radius: 4px; 
+			padding: 5px 5px 5px 10px; 
+			background-color: #ffffff;
+		}
 </style>
 
 </head>
-	
+
 <body>
-
-	<div class="top-nav">
-		<div class="container">
-			<nav class="navbar navbar-default">
-
-				<div class="collapse navbar-collapse navbar-right"
-					id="bs-example-navbar-collapse-1">
-					<nav class="menu menu--shylock">
-						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
-
-
-							<li><a href=""><p th:text="#{menu.master}"> </p></a></li>
-							
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.member}"> </p></span>
-							</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a th:href="@{/add_member}"><p th:text="#{menu.addmember}"> </p></a></li>
-									<li class="divider"></li>
-									<li><a th:href="@{/view_member}"><p th:text="#{menu.viewmember}"> </p></a></li>
-								</ul></li>
-								
-								
-								<li class="dropdown"><a href="#" class="dropdown-toggle"
-								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.milk}"> </p></span>
-							</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a th:href="@{/milk_wizard}"><p th:text="#{menu.milk}"> </p></a></li>
-									<li class="divider"></li>
-									<li><a th:href="@{/local_sale}"><p th:text="#{menu.localsale}"> </p></a></li>
-								</ul></li>
-								
-							<li><a href="blog.html"><p th:text="#{menu.ratechart}"> </p></a></li>
-							<li><a href="short-codes.html"><p th:text="#{menu.goodsmaster}"> </p></a></li>
-							<li><a href="mail.html"><p th:text="#{menu.exit}"> </p></a></li>
-							<li> 
-							<select class="select" role="menu" id="locales">
-    <option deselected th:text="#{language.change}"></option>
-    <option  value="en"  th:text="#{lang.eng}"></option>
-    <option   value="de" th:text="#{lang.de}"></option>
-</select>  
-							</li>
-						</ul>
-					</nav>
-				</div>
-			</nav>
-		</div>
-	</div>
-
+	<th:block th:include="navbar"></th:block>
 	<div class="agileits_breadcrumbs">
 		<div class="container">
 			<div class="agileits_breadcrumbs_left">
-				
+			<h2>vector Automation</h2>	
 			</div>
 			<div class="agileits_breadcrumbs_right">
-				<h2>ಸದಸ್ಯರನ್ನು ಸೇರಿಸು</h2>
+				<h2>Bannur - Milk Dairy</h2>
 			</div>
 		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	
+	<div class="container">
+	<div th:if="${confirmationMessage}" class="alert alert-success"
+				role="alert" th:text=${confirmationMessage}></div> 
+				<br>	
+<fieldset > 
+	<legend>Member Entry</legend>
+	<form action="#" th:action="@{/save_member}" th:object="${member}" method="post">
+	
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.name}"> </p><input type="text" th:field="*{name}" class="form-control" required="required">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.address}"> </p> <input type="text" th:field="*{address}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.name.en}"> </p><input type="text" th:field="*{name_en}" class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.fathername}"> </p> <input type="text" class="form-control" th:field="*{father_name}" required="required">
+		</div>
+	
+	</div>
+	
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.gender}"> </p><select class="form-control" th:field="*{gender}" id="sel1" required="required">
+							    <option th:value="#{member.men}" th:text="#{member.men}"></option>
+							    <option th:value="#{member.women}"th:text="#{member.women}"></option> 
+								</select>
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.rasu}"> </p><select class="form-control" th:field="*{rasu}" id="sel1" required="required">
+								<option th:value="#{member.cow}" th:text="#{member.cow}"></option>
+							    <option th:value="#{member.buffalo}" th:text="#{member.buffalo}"></option></select>
+		</div>
+		
+		<div class="col-md-2">
+			<p th:text="#{member.caste}"> </p><select class="form-control" th:field="*{pangada}" id="sel1" required="required">
+							    <option th:value="SC" th:text="SC"></option>
+							    <option th:value="ST"th:text="ST"></option> 
+								<option th:value="OBC" th:text="OBC"></option>
+							    <option th:value="GM"th:text="GM"></option> 
+								</select>
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.caste}"> </p><select class="form-control" th:field="*{pangada2}" id="sel1" required="required">
+								<option th:value="SC" th:text="SC"></option>
+							    <option th:value="ST"th:text="ST"></option> 
+								<option th:value="OBC" th:text="OBC"></option>
+							    <option th:value="GM"th:text="GM"></option> 
+								</select>
+		</div>
+		
+	</div>
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{bank.branch}"> </p><input type="text" th:field="*{branch}" class="form-control" required="required">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{bank.ifse}"> </p> <input type="text" th:field="*{ifse}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{milk.rate}"> </p><input type="text" th:field="*{father_name_en}" class="form-control" required="required" >
+		</div>
+		<!-- <div class="col-md-2">
+			<p th:text="#{milk.amount}"> </p> <input type="text" class="form-control" th:field="*{account_number}" required="required">
+		</div> -->
+	
+	</div>
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.phone}"> </p><input type="text" th:field="*{phone_number}" class="form-control" required="required">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.adhar}"> </p> <input type="text" th:field="*{adhar_number}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.nominee}"> </p><input type="text" th:field="*{nominee_name}" class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{member.relation}"> </p> <input type="text" class="form-control" th:field="*{nominee_relation}" required="required">
+		</div>
+	
+	</div>
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{member.type}"> </p><select class="form-control" th:field="*{member_type}" id="sel1" required="required">
+								<option th:value="#{member.member}" th:text="#{member.member}"></option>
+							    <option th:value="#{member.nonmember}" th:text="#{member.nonmember}"></option>
+		</div>
+		
+			<div class="col-md-2">
+		<input type="submit" class="btn btn-primary" value="submit " />
+		</div>
+	</div>
+	
+	</form>
+	
+	</fieldset>		
+		
+
+	
+	
+	
 	</div>
 
-	<div class="">
-		<div class="container">
-			
-			<div class="agile_mail_grids">
-				<div class="agile_mail_grid">
-				 <div th:if="${confirmationMessage}" class="alert alert-success"
-          role="alert" th:text=${confirmationMessage}></div>
-					<form action="#" th:action="@{/save_member}" th:object="${member}" method="post">
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{name}" placeholder="ಸದ್ಯಸರ ಹೆಸರು" required/>
-							<input type="text" th:field="*{address}" placeholder="ವಿಳಾಸ" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{name_en}" placeholder="Member Name in English" required>
-							<input type="text" th:field="*{father_name}" placeholder="ತಂದೆಯ ಹೆಸರು" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{branch}" placeholder="Branch" required>
-							<input type="text" th:field="*{ifse}" placeholder="IFSC Code" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{father_name_en}" placeholder="Father Name In English" required>
-							<input type="text" th:field="*{account_number}" placeholder="Bank Accout Number" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{phone_number}" placeholder="ದೂರವಾಣಿ ಸಂಖ್ಯೆ" required>
-							<input type="text" th:field="*{adhar_number}" placeholder="ಅಧಾರ್ ಸಂಖ್ಯೆ" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{pangada}" placeholder="ಪಂಗಡಾ" required>
-							<input type="text" th:field="*{pangada2}" placeholder="ಪಂಗಡಾ 2" required>
-						</div>
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{nominee_name}" placeholder="ನಾಮಿನಿ ದಾರಾ ಹೆಸರು" required>
-							<input type="text" th:field="*{nm_father_name}" placeholder=" ನಾಮಿನಿ ತಂದೆಯ ಹೆಸರು" required>
-						</div>
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{nominee_relation}" placeholder="ಸದಸ್ಯ ಸಂಬಂಧ" required>
-							<input type="text" th:field="*{property_info}" placeholder="ಆಸ್ತಿ ಮಾಹಿತಿ" required>
-						</div>
-						<div class="col-md-6 agile_mail_grid_left">
-							<input type="text" th:field="*{member_type}" placeholder="ಸದಸ್ಯರ ವಿಧಾ" required>
-						</div>
-						
-						<div class="col-md-6 agile_mail_grid_left">
-							<select  class="form-control" th:field="*{rasu}"  required>
-							    <option th:value="'ಹಸು'" th:text="ಹಸು"></option>
-							    <option th:value="'ಎಮ್ಮೆ'" th:text="ಎಮ್ಮೆ"></option>
-							</select>
-						</div>
-					
-					
-						<div class="col-md-6 agile_mail_grid_left">
-							<select class="form-control" th:field="*{gender}"  required>
-							    <option th:value="'ಪುರುಷ'" th:text="ಪುರುಷ"></option>
-							    <option th:value="'ಮಹಿಳೆ'" th:text="ಮಹಿಳೆ"></option>
-							</select>
-						</div>	
-					
-						
-						<div class="clearfix"> </div>
-						<input type="submit" value="Submit Now">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- //mail -->
-<!-- footer -->
-	<div class="footer">
-		<div class="container">
-			<div class="col-md-4 agileinfo_footer_grid">
-				<h3>About Us</h3>
-				<p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-				<form action="#" method="post">
-					<input type="email" name="Email" placeholder="Email" required>
-					<input type="submit" value="Send">
-				</form>
-			</div>
-			<div class="col-md-4 agileinfo_footer_grid">
-				<h3>Twitter Posts</h3>
-				<ul class="w3agile_footer_grid_list">
-					<li>Ut aut reiciendis voluptatibus maiores <a href="#">http://lkj.ewr.com</a> alias, ut aut reiciendis.
-						<span>02 days ago</span></li>
-					<li>Itaque earum rerum hic tenetur a sapiente delectus <a href="#">http://uiubajaj.com</a> ut aut
-						voluptatibus.<span>03 days ago</span></li>
-				</ul>
-			</div>
-			<div class="col-md-4 agileinfo_footer_grid">
-				<h3>Social Media</h3>
-				<ul class="agileinfo_social_icons">
-					<li><a href="#" class="facebook"><span></span><i>-</i>Facebook</a></li>
-					<li><a href="#" class="twitter"><span></span><i>-</i>Twitter</a></li>
-					<li><a href="#" class="google"><span></span><i>-</i>Google+</a></li>
-					<li><a href="#" class="instagram"><span></span><i>-</i>Instagram</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-<!-- //footer -->
-<!-- copy-right -->
 	
-<!-- //copy-right -->
-<!-- for bootstrap working -->
-	<script src="js/bootstrap.js"></script>
-<!-- //for bootstrap working -->
-<!-- here stars scrolling icon -->
+
+	<script th:src="@{js/bootstrap.js}"></script>
+	
+
 	<script type="text/javascript">
 		$(document).ready(function() {
 			/*
@@ -220,12 +264,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				scrollSpeed: 1200,
 				easingType: 'linear' 
 				};
-			*/
-								
-			$().UItoTop({ easingType: 'easeOutQuart' });
-								
+			 */
+
+			$().UItoTop({
+				easingType : 'easeOutQuart'
 			});
+
+		});
 	</script>
-<!-- //here ends scrolling icon -->
+
 </body>
 </html>
