@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Vector Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript">
+	
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+</script>
+
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css"
+	media="screen" property="" />
+
+<script type="text/javascript" th:src="@{js/jquery-2.1.4.min.js}"></script>
+
+<link
+	href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700'
+	rel='stylesheet' type='text/css' />
+<link
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	rel='stylesheet' type='text/css' />
+
+<script type="text/javascript" th:src="@{js/move-top.js}"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" th:src="@{js/easing.js}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+		
+		$(function() {
+			  $("#member_id").focus();
+			});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#locales").change(function() {
+			var selectedOption = $('#locales').val();
+			if (selectedOption != '') {
+				window.location.replace('?lang=' + selectedOption);
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+$("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+        </script>
+        
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #337ab7;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.dropdown-menu {
+	background-color: transparent;
+}
+
+.select {
+	color: #ffffff;
+	background-color: transparent;
+}
+
+option {
+	/* Whatever color  you want */
+	background-color: #E4E5E6;
+}
+ fieldset 
+	{
+		border: 1px solid #ddd !important;
+		margin: 0;
+		xmin-width: 0;
+		padding: 10px;       
+		position: relative;
+		border-radius:4px;
+		background-color:#f5f5f5;
+		padding-left:10px!important;
+	}	
+	
+		legend
+		{
+			font-size:14px;
+			font-weight:bold;
+			margin-bottom: 0px; 
+			width: 35%; 
+			border: 1px solid #ddd;
+			border-radius: 4px; 
+			padding: 5px 5px 5px 10px; 
+			background-color: #ffffff;
+		}
+</style>
+
+</head>
+
+<body>
+
+	<div class="top-nav">
+		<div class="container">
+			<nav class="navbar navbar-default">
+
+				<div class="collapse navbar-collapse navbar-right"
+					id="bs-example-navbar-collapse-1">
+					<nav class="menu menu--shylock">
+						<ul class="nav navbar-nav link-effect-7" id="link-effect-7">
+
+
+							<li><a href=""><p th:text="#{menu.master}"> </p></a></li>
+							
+							<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.member}"> </p></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/add_member}"><p th:text="#{menu.addmember}"> </p></a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/view_member}"><p th:text="#{menu.viewmember}"> </p></a></li>
+								</ul></li>
+								
+								
+								<li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-expanded="true"><span class="" ><p th:text="#{menu.milk}"> </p></span>
+							</a>
+								<ul class="dropdown-menu" role="menu">
+									<li><a th:href="@{/milk_wizard}"><p th:text="#{menu.milk}"> </p></a></li>
+									<li class="divider"></li>
+									<li><a th:href="@{/local_sale}"><p th:text="#{menu.localsale}"> </p></a></li>
+								</ul></li>
+								
+							<li><a href="blog.html"><p th:text="#{menu.ratechart}"> </p></a></li>
+							<li><a href="short-codes.html"><p th:text="#{menu.goodsmaster}"> </p></a></li>
+							<li><a href="mail.html"><p th:text="#{menu.exit}"> </p></a></li>
+							<li> 
+							<select class="select" role="menu" id="locales">
+    <option deselected th:text="#{language.change}"></option>
+    <option  value="en"  th:text="#{lang.eng}"></option>
+    <option   value="de" th:text="#{lang.de}"></option>
+</select>  
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<div class="agileits_breadcrumbs">
+		<div class="container">
+			<div class="agileits_breadcrumbs_left">
+			<h2>vector Automation</h2>	
+			</div>
+			<div class="agileits_breadcrumbs_right">
+				<h2>Bannur - Milk Dairy</h2>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+	<br>
+	
+	<div class="container">
+	<div th:if="${confirmationMessage}" class="alert alert-success"
+				role="alert" th:text=${confirmationMessage}></div> 
+				<br>	
+<fieldset > 
+	<legend>Bank Creation</legend>
+	<form action="#" th:action="@{/create_bank}" th:object="${bank}" method="post">
+	
+	
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{bank.name}"> </p><input type="text" th:field="*{bankname}" class="form-control" required="required">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{bank.branch}"> </p> <input type="text" th:field="*{branch}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{bank.ifse}"> </p><input type="text" th:field="*{ifsc}" class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{bank.migration_number}"> </p> <input type="text" class="form-control" th:field="*{migration_number}" required="required">
+		</div>
+	
+	</div>
+	<div class="form-group row">
+	
+		<div class="col-md-2">
+			<p th:text="#{bank.pincode}"> </p><input type="text" th:field="*{pincode}" class="form-control" >
+		</div>
+		
+		<div class="col-md-2">
+			<p th:text="#{bank.other}"> </p><input type="text" th:field="*{other_details}" class="form-control" >
+		</div>
+			<div class="col-md-2">
+		<input type="submit" class="btn btn-primary" value="submit " />
+		</div>
+	</div>
+	
+	</form>
+	
+	</fieldset>		
+		
+
+	
+	
+	
+	</div>
+
+	
+
+	<script th:src="@{js/bootstrap.js}"></script>
+	
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			 */
+
+			$().UItoTop({
+				easingType : 'easeOutQuart'
+			});
+
+		});
+	</script>
+
+</body>
+</html>

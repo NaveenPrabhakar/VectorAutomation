@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 
-import ch.qos.logback.classic.Logger;
 
 
 
@@ -41,6 +39,12 @@ public class AppController {
 	
 	@Autowired
 	private LocalSaleService localSaleService;
+	
+	@Autowired
+	private TrucksheetService trucksheetService;
+	
+	@Autowired
+	private BankCreationService bankCreationService;
 
 	@RequestMapping("/")
 	public String viewLoginPage(Model model) {
@@ -336,5 +340,47 @@ public class AppController {
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		return mav;
 	}
+	
+	@GetMapping("/view_trucksheet")
+	public String viewTrucksheet(Model model)
+	{
+		log.info("Truck sheet is invoked");
+		Trucksheet trucksheet = new Trucksheet();
+		model.addAttribute("trucksheet",trucksheet);
+		return "trucksheet";
+		
+	}
+	@RequestMapping(value = "/truck_sheet", method = RequestMethod.POST)
+	public ModelAndView save_trucksheet(@ModelAttribute("localsale") Trucksheet trucksheet, ModelAndView modelAndView) {
+		log.info("Save truck sheet controller is invoked - " +trucksheet.toString());
+		ModelAndView mav = new ModelAndView("trucksheet");
+		trucksheetService.save(trucksheet);
+		Trucksheet truck = new Trucksheet();
+		mav.addObject("trucksheet",truck);
+		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		return mav;
+	}
+	
+	@GetMapping("/view_bank")
+	public String view_bank(Model model)
+	{
+		log.info("Bank View is invoked");
+		Bank_Creation bank_Creation =  new Bank_Creation();
+		model.addAttribute("bank",bank_Creation);
+		return "bank_creation";
+	}
+	
+	// @{/create_bank}
+	@RequestMapping(value = "/create_bank", method = RequestMethod.POST)
+	public ModelAndView save_bank(@ModelAttribute("bank") Bank_Creation bank_Creation, ModelAndView modelAndView) {
+		log.info("Save truck sheet controller is invoked - " +bank_Creation.toString());
+		ModelAndView mav = new ModelAndView("bank_creation");
+		bankCreationService.save(bank_Creation);
+		Bank_Creation bc = new Bank_Creation();
+		mav.addObject("trucksheet",bc);
+		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		return mav;
+	}
+	
 	
 }

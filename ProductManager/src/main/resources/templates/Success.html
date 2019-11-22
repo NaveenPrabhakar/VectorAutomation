@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<fieldset>
+<legend>Succcess Message</legend>
+<div th:if="${confirmationMessage}" class="alert alert-success"
+          role="alert" th:text=${confirmationMessage}></div>
+          </fieldset>
+          
+</body>
+</html>
+
