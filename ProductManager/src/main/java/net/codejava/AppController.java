@@ -15,10 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-
-
 @Controller
 public class AppController {
 	
@@ -48,10 +44,8 @@ public class AppController {
 
 	@RequestMapping("/")
 	public String viewLoginPage(Model model) {
-
 		Login login = new Login();
 		model.addAttribute("login", login);
-		
 		log.info("Login Page is involked");
 		return "login";
 	}
@@ -239,17 +233,41 @@ public class AppController {
 		model.addAttribute("totalquantity", current_milk);
 		Milk_Collection milk_Collection = new Milk_Collection();
 		model.addAttribute("milk_collection", milk_Collection);
-		model.addAttribute("milk_member", collections);
-        return "milk_wizard";
+		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		model.addAttribute("milk_member", coll);
+		return "milk_wizard";
+		}else if(milk_quantity != null && local_quantity == null )
+		{
+			model.addAttribute("milkquantity", milk_quantity);
+			Milk_Collection milk_Collection = new Milk_Collection();
+			model.addAttribute("milk_collection", milk_Collection);
+			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+			model.addAttribute("milk_member", coll);
+			model.addAttribute("localquantity", 0);
+			model.addAttribute("totalquantity", 0);
+			return "milk_wizard";
+		}
+		else if(milk_quantity == null && local_quantity != null)
+		{
+			model.addAttribute("localquantity", local_quantity);
+			Milk_Collection milk_Collection = new Milk_Collection();
+			model.addAttribute("milk_collection", milk_Collection);
+			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+			model.addAttribute("milk_member", coll);
+			model.addAttribute("milkquantity", 0);
+			model.addAttribute("totalquantity", 0);
+			return "milk_wizard";
 		}
 		else {
-		model.addAttribute("milkquantity", 0);
-		model.addAttribute("localquantity", 0);
-		model.addAttribute("totalquantity", 0);
+			model.addAttribute("milkquantity", 0);
+			model.addAttribute("localquantity", 0);
+			model.addAttribute("totalquantity", 0);
 		Milk_Collection milk_Collection = new Milk_Collection();
 		model.addAttribute("milk_collection", milk_Collection);
-		model.addAttribute("milk_member", collections);
-        return "milk_wizard";}
+		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+		model.addAttribute("milk_member", coll);
+		return "milk_wizard";
+       }
     }
 	
 	@RequestMapping(value = "/save_milkCollection", method = RequestMethod.POST)
@@ -257,9 +275,6 @@ public class AppController {
 		log.info("Save MilkCollection controller is Invoked - "+milk_collection.toString());
 		int count = milk_collectionservice.check_duplicate_ShiftEntry(milk_collection.getMember_id(), milk_collection.getShift(), milk_collection.getCreated_date());
 		log.info("Member count in this shift - "+count);
-		
-		
-		
 		Boolean id_Exist = memberservice.is_Id_Exist(milk_collection.getMember_id());
 		if(id_Exist) 
 		{
@@ -303,6 +318,27 @@ public class AppController {
 		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		modelAndView.addObject("milk_member", coll);
 		return modelAndView;
+		}else if(milk_quantity != null && local_quantity == null )
+		{
+			modelAndView.addObject("milkquantity", milk_quantity);
+			modelAndView.addObject("localquantity", 0);
+			modelAndView.addObject("totalquantity", 0);
+			Milk_Collection milk_Collection = new Milk_Collection();
+			modelAndView.addObject("milk_collection", milk_Collection);
+			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+			modelAndView.addObject("milk_member", coll);
+			return modelAndView;
+		}
+		else if(milk_quantity == null && local_quantity != null)
+		{
+			modelAndView.addObject("localquantity", local_quantity);
+			modelAndView.addObject("milkquantity", 0);
+			modelAndView.addObject("totalquantity", 0);
+			Milk_Collection milk_Collection = new Milk_Collection();
+			modelAndView.addObject("milk_collection", milk_Collection);
+			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
+			modelAndView.addObject("milk_member", coll);
+			return modelAndView;
 		}
 		else {
 			modelAndView.addObject("milkquantity", 0);
