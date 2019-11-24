@@ -3,6 +3,7 @@ package net.codejava;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,16 @@ public class AppController {
 	
 	@Autowired
 	private BankCreationService bankCreationService;
+	
+	@Autowired
+	private SocietyService societyService;
 
 	@RequestMapping("/")
 	public String viewLoginPage(Model model) {
 		Login login = new Login();
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		model.addAttribute("login", login);
 		log.info("Login Page is involked");
 		return "login";
@@ -52,7 +59,9 @@ public class AppController {
 	
 	@RequestMapping("/admin")
 	public String viewAdminPage(Model model) {
-
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		log.info("Admin Page is involked");
 		return "admin";
 	}
@@ -70,6 +79,11 @@ public class AppController {
 		localSale.setBill_number(maxBillNumber);
 		log.info("Local page  - Bill Number is - - "+maxBillNumber);
 		model.addAttribute("localsale", localSale);
+		List<LocalSale> list = localSaleService.getdata(created_date);//
+		model.addAttribute("localsales", list);
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		return "localsale";
 		
 	}
@@ -77,6 +91,8 @@ public class AppController {
 	@RequestMapping("/logout")
 	public ModelAndView viewLogoutPage(Model model) {
 		log.info("Logout Page is involked");
+		societyService.resetAllEntries();
+		log.info("Cache is Evicted");
 		Login login = new Login();
 		model.addAttribute("login", login);
 		ModelAndView mav = new ModelAndView("login");
@@ -87,6 +103,10 @@ public class AppController {
 	@RequestMapping("/main")
 	public String viewMainPage(Model model) {
 		log.info("Main Page is involked");
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
+		
 		return "main";
 	}
 	
@@ -94,6 +114,9 @@ public class AppController {
 	public String viewMemberPage(Model model) {
 		log.info("View Member  Page is involked");
 		Member member = new Member();
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		model.addAttribute("member", member);
 
 		return "view_member";
@@ -101,7 +124,6 @@ public class AppController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView checkLogin(@ModelAttribute("login") Login login) {
-		
 		log.info("Login Controller");
 		
 		Boolean value = loginService.id_Exist(login.getId());
@@ -113,6 +135,9 @@ public class AppController {
 			{
 				log.info("Login Successful");
 				ModelAndView mav = new ModelAndView("main");
+				long id =1;
+				Society society= societyService.getdata(id);
+				mav.addObject("society",society);
 				return mav;
 				
 			}else {
@@ -137,6 +162,9 @@ public class AppController {
 		// Product product = new Product();
 		log.info("Add Member page is invoked");
 		Member member = new Member();
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		model.addAttribute("member", member);
 
 		return "member";
@@ -224,6 +252,9 @@ public class AppController {
 		log.info("milk"+milk_quantity);
 		Double local_quantity = localSaleService.local_quantity(created_date);
 		log.info("local"+local_quantity);
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		if(milk_quantity !=null && local_quantity!=null )
 		{
 		double current_milk = milk_quantity - local_quantity;
@@ -357,6 +388,9 @@ public class AppController {
 		Boolean id_Exist = memberservice.is_Id_Exist(milk_Collection.getMember_id());
 		log.info("view milk member is invoked");
 		log.info("Id exist - "+id_Exist);
+		long id =1;
+		Society society= societyService.getdata(id);
+		modelAndView.addObject("society",society);
 		if (id_Exist)
 		{
 		Member mem = memberservice.get(milk_Collection.getMember_id());
@@ -421,6 +455,11 @@ public class AppController {
 		log.info("Save Local sale controller is invoked - " +localSale.toString());
 		ModelAndView mav = new ModelAndView("localsale");
 		localSaleService.save(localSale);
+		List<LocalSale> list = localSaleService.getdata(created_date);//
+		mav.addObject("localsales", list);
+		long id =1;
+		Society society= societyService.getdata(id);
+		modelAndView.addObject("society",society);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		return mav;
 	}
@@ -431,6 +470,9 @@ public class AppController {
 		log.info("Truck sheet is invoked");
 		Trucksheet trucksheet = new Trucksheet();
 		model.addAttribute("trucksheet",trucksheet);
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		return "trucksheet";
 		
 	}
@@ -439,6 +481,7 @@ public class AppController {
 		log.info("Save truck sheet controller is invoked - " +trucksheet.toString());
 		ModelAndView mav = new ModelAndView("trucksheet");
 		trucksheetService.save(trucksheet);
+	
 		Trucksheet truck = new Trucksheet();
 		mav.addObject("trucksheet",truck);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
@@ -451,10 +494,13 @@ public class AppController {
 		log.info("Bank View is invoked");
 		Bank_Creation bank_Creation =  new Bank_Creation();
 		model.addAttribute("bank",bank_Creation);
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
 		return "bank_creation";
 	}
 	
-	// @{/create_bank}
+	
 	@RequestMapping(value = "/create_bank", method = RequestMethod.POST)
 	public ModelAndView save_bank(@ModelAttribute("bank") Bank_Creation bank_Creation, ModelAndView modelAndView) {
 		log.info("Save truck sheet controller is invoked - " +bank_Creation.toString());
