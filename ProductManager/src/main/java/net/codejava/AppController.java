@@ -45,6 +45,9 @@ public class AppController {
 	
 	@Autowired
 	private SocietyService societyService;
+	
+	@Autowired
+	private BalanceDeduction_service balanceDeduction_service;
 
 	@RequestMapping("/")
 	public String viewLoginPage(Model model) {
@@ -509,6 +512,28 @@ public class AppController {
 		Bank_Creation bc = new Bank_Creation();
 		mav.addObject("trucksheet",bc);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+		return mav;
+	}
+	
+	@RequestMapping("/balance")
+	public String viewBalancePage(Model model) {
+		BalanceDeduction balanceDeduction = new BalanceDeduction();
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
+		model.addAttribute("balance_data",balanceDeduction);
+		log.info("Balace Page is involked");
+		return "balance_deduct";
+	}
+	
+
+	@RequestMapping(value = "/balanceinfo", method = RequestMethod.POST)
+	public ModelAndView get_balance(@ModelAttribute("balance_data") BalanceDeduction balanceDeduction, ModelAndView modelAndView) {
+		log.info("Check Balance is invoked - " +balanceDeduction.toString());
+		ModelAndView mav = new ModelAndView("balance_deduct");
+		BalanceDeduction bDeduction = balanceDeduction_service.getBalance(balanceDeduction.getMember_id(), balanceDeduction.getFromDate(), balanceDeduction.getToDate());
+		log.info("Balanceinfo - "+bDeduction.toString());
+		mav.addObject("balance_data",bDeduction);
 		return mav;
 	}
 	

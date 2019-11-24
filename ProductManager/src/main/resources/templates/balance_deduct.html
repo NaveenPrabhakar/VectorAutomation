@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Vector Automation</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords"
+	content="Cattle Farm Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript">
+	
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+
+
+</script>
+
+<link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"
+	media="all" />
+<link rel="stylesheet" th:href="@{css/flexslider.css}" type="text/css"
+	media="screen" property="" />
+
+<script type="text/javascript" th:src="@{js/jquery-2.1.4.min.js}"></script>
+
+<link
+	href='//fonts.googleapis.com/css?family=Poppins:400,300,500,600,700'
+	rel='stylesheet' type='text/css' />
+<link
+	href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	rel='stylesheet' type='text/css' />
+
+<script type="text/javascript" th:src="@{js/move-top.js}"></script>
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script type="text/javascript" th:src="@{js/easing.js}"></script>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$(".scroll").click(function(event) {
+			event.preventDefault();
+			$('html,body').animate({
+				scrollTop : $(this.hash).offset().top
+			}, 1000);
+		});
+		
+		$(function() {
+			  $("#member_id").focus();
+			});
+	});
+</script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#locales").change(function() {
+			var selectedOption = $('#locales').val();
+			if (selectedOption != '') {
+				window.location.replace('?lang=' + selectedOption);
+			}
+		});
+	});
+</script>
+<script type="text/javascript">
+$("input").on("change", function() {
+    this.setAttribute(
+        "data-date",
+        moment(this.value, "YYYY-MM-DD")
+        .format( this.getAttribute("data-date-format") )
+    )
+}).trigger("change")
+        </script>
+        
+
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td {
+  text-align: left;
+  padding: 8px;
+}
+th {
+  background-color: #337ab7;
+  color: white;
+}
+
+tr:nth-child(even) {background-color: #f2f2f2;}
+
+.dropdown-menu {
+	background-color: transparent;
+}
+
+.select {
+	color: #ffffff;
+	background-color: transparent;
+}
+
+option {
+	/* Whatever color  you want */
+	background-color: #E4E5E6;
+}
+ fieldset 
+	{
+		border: 1px solid #ddd !important;
+		margin: 0;
+		xmin-width: 0;
+		padding: 10px;       
+		position: relative;
+		border-radius:4px;
+		background-color:#f5f5f5;
+		padding-left:10px!important;
+	}	
+	
+		legend
+		{
+			font-size:14px;
+			font-weight:bold;
+			margin-bottom: 0px; 
+			width: 35%; 
+			border: 1px solid #ddd;
+			border-radius: 4px; 
+			padding: 5px 5px 5px 10px; 
+			background-color: #ffffff;
+		}
+		
+		.card1 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: #da2d2d;
+	color: white;
+	align:center;
+	
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+.card2 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: #eb8242;
+	color: white;
+	align:center;
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+.card3 {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	background-color: #9b45e4;
+	color: white;
+	align:center;
+	transition: 0.3s;
+	width: 100%;
+	border-radius: 5px;
+}
+
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+img {
+	border-radius: 5px 5px 0 0;
+}
+
+.container {
+	padding: 2px 16px;
+}
+</style>
+
+</head>
+
+<body>
+
+	<th:block th:include="navbar"></th:block>
+	<th:block th:include="breadcrum"></th:block>
+	<br>
+	<br>
+	<br>
+	
+	<div class="container">
+		<div class="">
+		
+		 <div th:if="${confirmationMessage}" class="alert alert-success"
+				role="alert" th:text=${confirmationMessage}></div> 
+				<fieldset > 
+			<form action="#" th:action="@{/balanceinfo}" th:object="${balance_data}" method="post">
+				<div class="col-md-2">
+						<p th:text="#{member.id}"> </p><input type="text" th:field="*{member_id}"  class="form-control"  required="required">
+				</div>
+				<div class="col-md-2">
+				<p th:text="#{const.date}"> </p><input type="date" th:field="*{fromDate}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" required="required">
+				</div>
+				<div class="col-md-2">
+				<p th:text="#{const.date}"> </p><input type="date" th:field="*{toDate}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" required="required">
+				</div>
+				<input type="submit" class="btn btn-primary" value="ಹುಡುಕು " />
+			</form>
+			</fieldset>
+		</div>
+	<fieldset > 
+	<legend>Balance Deduction</legend>
+		<form action="#" th:action="@{/save_balance}" th:object="${balance_data}" method="post">
+		
+		<div class="form-group row">
+		 <div class="col-md-2">
+			<p th:text="#{member.id}"> </p> <input type="text" class="form-control" th:field="*{member_id}">
+		</div> 
+		<div class="col-md-2">
+			<p th:text="#{member.name}"> </p> <input type="text" class="form-control" th:field="*{name}">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{balance.fromdate}"> </p> <input type="date" class="form-control" th:field="*{fromDate}">
+		</div>
+		
+		
+	</div>
+	
+	
+	<div class="form-group row">
+	<div class="col-md-2">
+			<p th:text="#{balance.todate}"> </p><input type="date" th:field="*{toDate}" class="form-control" required="required">
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{balance.totalamount}"> </p> <input type="text" th:field="*{total_amount}"  class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{balance.deductionamount}"> </p><input type="text" th:field="*{deduction_amount}" class="form-control" required="required" >
+		</div>
+		<div class="col-md-2">
+			<p th:text="#{balance.balanceamount}"> </p> <input type="text" class="form-control" th:field="*{balance_amount}" required="required">
+		</div>
+	
+	</div>
+
+	
+	<div class="form-group row">
+		<input type="submit" class="btn btn-primary" value="submit " />
+	</div>
+		</form>
+		</fieldset>
+		<br>
+		<br>
+		
+	
+	<!-- <div class="bs-docs-example">
+				<table class="table-bordered">
+					<thead >
+						<tr>
+							<th> <p th:text="#{member.id}"> </p></th>
+							<th><p th:text="#{member.name}"> </p></th>
+							<th><p th:text="#{milk.shift}"> </p> </th>
+							<th><p th:text="#{milk.quantity}"> </p></th>
+							<th><p th:text="#{milk.amount}"> </p></th>
+							<th><p th:text="#{const.date}"> </p></th>
+							<th>Edit/Delete</th>
+						</tr>
+					</thead>
+					<tbody>
+						 <tr th:each="milk : ${milk_member}">
+						 <td th:text="${milk.milk_collection_id}"></td>
+            	<td th:text="${milk.member_id}"></td>
+            	<td th:text="${milk.name}"></td>
+                <td th:text="${milk.shift}"></td>
+                <td th:text="${milk.quantity}"></td>
+                <td th:text="${milk.amount}"></td>
+                <td th:text="${milk.created_date}"></td>
+                <td>
+                	<a th:href="@{'/edit_milk/' + ${milk.milk_collection_id}}"><span class="label label-warning">Edit</span></a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete_milkdata/' + ${milk.milk_collection_id}}"><span class="label label-danger">Delete</span></a> 
+                </td>
+                
+            </tr>
+					</tbody>
+				</table>
+			</div> -->
+	
+	
+	</div>
+
+	<!-- <div class="footer">
+		<div class="container">
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Vector Automation</h3>
+
+				<form action="#" method="post">
+					<input type="email" name="Email" placeholder="Email" required />
+					<input type="submit" value="Send" />
+				</form>
+			</div>
+
+			<div class="col-md-4 agileinfo_footer_grid">
+				<h3>Social Media</h3>
+				<ul class="agileinfo_social_icons">
+					<li><a href="#" class="facebook"><span></span><i>-</i>Facebook</a></li>
+					<li><a href="#" class="twitter"><span></span><i>-</i>Twitter</a></li>
+					<li><a href="#" class="google"><span></span><i>-</i>Google+</a></li>
+					<li><a href="#" class="instagram"><span></span><i>-</i>Instagram</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+ -->
+
+
+	<script th:src="@{js/bootstrap.js}"></script>
+	
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+				var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+				};
+			 */
+
+			$().UItoTop({
+				easingType : 'easeOutQuart'
+			});
+
+		});
+	</script>
+
+</body>
+</html>
