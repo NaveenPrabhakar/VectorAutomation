@@ -48,6 +48,8 @@ public class AppController {
 	
 	@Autowired
 	private BalanceDeduction_service balanceDeduction_service;
+	
+	
 
 	@RequestMapping("/")
 	public String viewLoginPage(Model model) {
@@ -309,6 +311,8 @@ public class AppController {
 		log.info("Save MilkCollection controller is Invoked - "+milk_collection.toString());
 		int count = milk_collectionservice.check_duplicate_ShiftEntry(milk_collection.getMember_id(), milk_collection.getShift(), milk_collection.getCreated_date());
 		log.info("Member count in this shift - "+count);
+		long id =1;
+		Society society= societyService.getdata(id);
 		Boolean id_Exist = memberservice.is_Id_Exist(milk_collection.getMember_id());
 		if(id_Exist) 
 		{
@@ -318,7 +322,8 @@ public class AppController {
 					List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 					//List<Milk_Collection> milk = milk_collectionservice.getMilk_Collection(milk_collection.getMember_id());
 					modelAndView.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
-					modelAndView.addObject("milk_member", collections);
+					modelAndView.addObject("milk_member", collections); //society
+					modelAndView.addObject("society", society);
 					modelAndView.setViewName("milk_wizard");
 					
 							}
@@ -326,12 +331,14 @@ public class AppController {
 					List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 					modelAndView.addObject("milk_member", collections);
 					modelAndView.addObject("confirmationMessage", "ಈ ಶಿಫ್ಟ್‌ನಲ್ಲಿ ಸದಸ್ಯ ಈಗಾಗಲೇ ಹಾಲು ಸೇರಿಸಿದ್ದಾರೆ");
+					modelAndView.addObject("society", society);
 					modelAndView.setViewName("milk_wizard");
 					
 				}
 		}
 		else {
 			modelAndView.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ");
+			modelAndView.addObject("society", society);
 			modelAndView.setViewName("milk_wizard");
 			
 		}
@@ -351,6 +358,7 @@ public class AppController {
 		modelAndView.addObject("milk_collection", milk_Collection);
 		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		modelAndView.addObject("milk_member", coll);
+		modelAndView.addObject("society", society);
 		return modelAndView;
 		}else if(milk_quantity != null && local_quantity == null )
 		{
@@ -361,6 +369,7 @@ public class AppController {
 			modelAndView.addObject("milk_collection", milk_Collection);
 			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
 			modelAndView.addObject("milk_member", coll);
+			modelAndView.addObject("society", society);
 			return modelAndView;
 		}
 		else if(milk_quantity == null && local_quantity != null)
@@ -372,6 +381,7 @@ public class AppController {
 			modelAndView.addObject("milk_collection", milk_Collection);
 			List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
 			modelAndView.addObject("milk_member", coll);
+			modelAndView.addObject("society", society);
 			return modelAndView;
 		}
 		else {
@@ -382,6 +392,7 @@ public class AppController {
 		modelAndView.addObject("milk_collection", milk_Collection);
 		List<Milk_Collection> coll = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		modelAndView.addObject("milk_member", coll);
+		modelAndView.addObject("society", society);
 		return modelAndView;
        }
 	}
@@ -393,7 +404,7 @@ public class AppController {
 		log.info("Id exist - "+id_Exist);
 		long id =1;
 		Society society= societyService.getdata(id);
-		modelAndView.addObject("society",society);
+		mav.addObject("society",society);
 		if (id_Exist)
 		{
 		Member mem = memberservice.get(milk_Collection.getMember_id());
@@ -484,7 +495,9 @@ public class AppController {
 		log.info("Save truck sheet controller is invoked - " +trucksheet.toString());
 		ModelAndView mav = new ModelAndView("trucksheet");
 		trucksheetService.save(trucksheet);
-	
+		long id =1;
+		Society society= societyService.getdata(id);
+				mav.addObject("society",society);
 		Trucksheet truck = new Trucksheet();
 		mav.addObject("trucksheet",truck);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
@@ -511,6 +524,9 @@ public class AppController {
 		bankCreationService.save(bank_Creation);
 		Bank_Creation bc = new Bank_Creation();
 		mav.addObject("trucksheet",bc);
+		long id =1;
+		Society society= societyService.getdata(id);
+				mav.addObject("society",society);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		return mav;
 	}
@@ -530,11 +546,41 @@ public class AppController {
 	@RequestMapping(value = "/balanceinfo", method = RequestMethod.POST)
 	public ModelAndView get_balance(@ModelAttribute("balance_data") BalanceDeduction balanceDeduction, ModelAndView modelAndView) {
 		log.info("Check Balance is invoked - " +balanceDeduction.toString());
+		
+		Member mem = memberservice.get(balanceDeduction.getMember_id());
+		log.info("Member info - "+mem.toString());
+		Double totalamount = milk_collectionservice.getAmount(balanceDeduction.getMember_id(), balanceDeduction.getFromDate(), balanceDeduction.getToDate());
+		log.info("totalamount  - "+totalamount);
+		BalanceDeduction bd = new BalanceDeduction();
+		bd.setMember_id(mem.getId());
+		bd.setName(mem.getName());
+		bd.setFromDate(balanceDeduction.getFromDate());
+		bd.setToDate(balanceDeduction.getToDate());
+		bd.setTotal_amount(totalamount);
+		log.info("Balance inf0 - "+bd.toString());
 		ModelAndView mav = new ModelAndView("balance_deduct");
-		BalanceDeduction bDeduction = balanceDeduction_service.getBalance(balanceDeduction.getMember_id(), balanceDeduction.getFromDate(), balanceDeduction.getToDate());
-		log.info("Balanceinfo - "+bDeduction.toString());
-		mav.addObject("balance_data",bDeduction);
-		return mav;
+				log.info("Balanceinfo - "+bd.toString());
+				long id =1;
+				Society society= societyService.getdata(id);
+				mav.addObject("society",society);
+				mav.addObject("balance_data",bd);
+				return mav;
+	}
+	
+	//save_balance
+	
+	@RequestMapping(value = "/save_balance", method = RequestMethod.POST)
+	public ModelAndView save_balance(@ModelAttribute("balance_data") BalanceDeduction balanceDeduction, ModelAndView modelAndView) {
+		log.info("save_balance  is invoked - " +balanceDeduction.toString());
+		balanceDeduction.setBalance_amount(balanceDeduction.getTotal_amount() - balanceDeduction.getDeduction_amount());
+		balanceDeduction_service.save(balanceDeduction);
+		ModelAndView mav = new ModelAndView("balance_deduct");
+		long id =1;
+		Society society= societyService.getdata(id);
+				mav.addObject("society",society);
+				mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
+				
+				return mav;
 	}
 	
 	

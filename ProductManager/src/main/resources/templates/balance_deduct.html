@@ -187,10 +187,10 @@ img {
 						<p th:text="#{member.id}"> </p><input type="text" th:field="*{member_id}"  class="form-control"  required="required">
 				</div>
 				<div class="col-md-2">
-				<p th:text="#{const.date}"> </p><input type="date" th:field="*{fromDate}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" required="required">
+				<p th:text="#{const.date}"> </p><input type="date" th:field="*{fromDate}" data-date="" class="form-control"  required="required">
 				</div>
 				<div class="col-md-2">
-				<p th:text="#{const.date}"> </p><input type="date" th:field="*{toDate}" data-date="" class="form-control" data-date-format="YYYY-MM-DD" required="required">
+				<p th:text="#{const.date}"> </p><input type="date" th:field="*{toDate}" data-date="" class="form-control"  required="required">
 				</div>
 				<input type="submit" class="btn btn-primary" value="ಹುಡುಕು " />
 			</form>
@@ -202,13 +202,13 @@ img {
 		
 		<div class="form-group row">
 		 <div class="col-md-2">
-			<p th:text="#{member.id}"> </p> <input type="text" class="form-control" th:field="*{member_id}">
+			<p th:text="#{member.id}"> </p> <input type="text" class="form-control" th:field="*{member_id}" readonly="readonly">
 		</div> 
 		<div class="col-md-2">
-			<p th:text="#{member.name}"> </p> <input type="text" class="form-control" th:field="*{name}">
+			<p th:text="#{member.name}"> </p> <input type="text" class="form-control" th:field="*{name}" readonly="readonly">
 		</div>
 		<div class="col-md-2">
-			<p th:text="#{balance.fromdate}"> </p> <input type="date" class="form-control" th:field="*{fromDate}">
+			<p th:text="#{balance.fromdate}"> </p> <input type="date" class="form-control" th:field="*{fromDate}" readonly="readonly">
 		</div>
 		
 		
@@ -217,17 +217,17 @@ img {
 	
 	<div class="form-group row">
 	<div class="col-md-2">
-			<p th:text="#{balance.todate}"> </p><input type="date" th:field="*{toDate}" class="form-control" required="required">
+			<p th:text="#{balance.todate}"> </p><input type="date" th:field="*{toDate}" class="form-control" required="required" readonly="readonly">
 		</div>
 		<div class="col-md-2">
-			<p th:text="#{balance.totalamount}"> </p> <input type="text" th:field="*{total_amount}"  class="form-control" required="required" >
+			<p th:text="#{balance.totalamount}"> </p> <input type="text" th:field="*{total_amount}"  class="form-control" required="required" readonly="readonly">
 		</div>
 		<div class="col-md-2">
 			<p th:text="#{balance.deductionamount}"> </p><input type="text" th:field="*{deduction_amount}" class="form-control" required="required" >
 		</div>
-		<div class="col-md-2">
+		<!-- <div class="col-md-2">
 			<p th:text="#{balance.balanceamount}"> </p> <input type="text" class="form-control" th:field="*{balance_amount}" required="required">
-		</div>
+		</div> -->
 	
 	</div>
 

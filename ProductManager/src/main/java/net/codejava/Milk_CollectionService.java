@@ -55,4 +55,8 @@ public class Milk_CollectionService {
 		return  repo.tottalQuanity(created_date);
 	 }
 
+	 public Double getAmount(long id,LocalDate from_date, LocalDate to_date)
+	 {
+		 return repo.getAmountsum(id, from_date, to_date);
+	 }
 }

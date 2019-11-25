@@ -20,5 +20,10 @@ public class BalanceDeduction_service {
 		return balanceDeductionrRepo.getBalance(id,from_date,to_date);
 		
 	}
+	
+	public void save(BalanceDeduction balanceDeduction)
+	{
+		balanceDeductionrRepo.save(balanceDeduction);
+	}
 
 }

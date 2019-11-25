@@ -8,13 +8,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class BalanceDeduction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long balanceid;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fromDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate toDate;
 	private long member_id;
 	private String name;
