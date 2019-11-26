@@ -241,38 +241,39 @@ img {
 		<br>
 		
 	
-	<!-- <div class="bs-docs-example">
+ <div class="bs-docs-example">
 				<table class="table-bordered">
 					<thead >
 						<tr>
 							<th> <p th:text="#{member.id}"> </p></th>
 							<th><p th:text="#{member.name}"> </p></th>
-							<th><p th:text="#{milk.shift}"> </p> </th>
-							<th><p th:text="#{milk.quantity}"> </p></th>
-							<th><p th:text="#{milk.amount}"> </p></th>
-							<th><p th:text="#{const.date}"> </p></th>
+							<th><p th:text="#{balance.fromdate}"> </p> </th>
+							<th><p th:text="#{balance.todate}"> </p></th>
+							<th><p th:text="#{balance.totalamount}"> </p></th>
+							<th><p th:text="#{balance.deductionamount}"> </p></th>
+							<th><p th:text="#{balance.balanceamount}"> </p></th>
 							<th>Edit/Delete</th>
 						</tr>
 					</thead>
 					<tbody>
-						 <tr th:each="milk : ${milk_member}">
-						 <td th:text="${milk.milk_collection_id}"></td>
+						 <tr th:each="milk : ${listinfo}">
             	<td th:text="${milk.member_id}"></td>
             	<td th:text="${milk.name}"></td>
-                <td th:text="${milk.shift}"></td>
-                <td th:text="${milk.quantity}"></td>
-                <td th:text="${milk.amount}"></td>
-                <td th:text="${milk.created_date}"></td>
-                <td>
-                	<a th:href="@{'/edit_milk/' + ${milk.milk_collection_id}}"><span class="label label-warning">Edit</span></a>
+                <td th:text="${milk.fromDate}"></td>
+                <td th:text="${milk.toDate}"></td>
+                <td th:text="${milk.total_amount}"></td>
+                <td th:text="${milk.deduction_amount}"></td>
+                <td th:text="${milk.balance_amount}"></td>
+                <!-- <td>
+                	<a th:href="@{'/edit_/' + ${milk.milk_collection_id}}"><span class="label label-warning">Edit</span></a>
                 	&nbsp;&nbsp;&nbsp;
-                	<a th:href="@{'/delete_milkdata/' + ${milk.milk_collection_id}}"><span class="label label-danger">Delete</span></a> 
-                </td>
+                	<a th:href="@{'/delete_mi/' + ${milk.milk_collection_id}}"><span class="label label-danger">Delete</span></a> 
+                </td> -->
                 
             </tr>
 					</tbody>
 				</table>
-			</div> -->
+			</div> 
 	
 	
 	</div>

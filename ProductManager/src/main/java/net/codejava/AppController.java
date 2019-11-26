@@ -548,6 +548,7 @@ public class AppController {
 		log.info("Check Balance is invoked - " +balanceDeduction.toString());
 		
 		Member mem = memberservice.get(balanceDeduction.getMember_id());
+		List<BalanceDeduction> list = balanceDeduction_service.getdata(balanceDeduction.getMember_id());
 		log.info("Member info - "+mem.toString());
 		Double totalamount = milk_collectionservice.getAmount(balanceDeduction.getMember_id(), balanceDeduction.getFromDate(), balanceDeduction.getToDate());
 		log.info("totalamount  - "+totalamount);
@@ -564,6 +565,7 @@ public class AppController {
 				Society society= societyService.getdata(id);
 				mav.addObject("society",society);
 				mav.addObject("balance_data",bd);
+				mav.addObject("listinfo",list);
 				return mav;
 	}
 	
@@ -574,10 +576,12 @@ public class AppController {
 		log.info("save_balance  is invoked - " +balanceDeduction.toString());
 		balanceDeduction.setBalance_amount(balanceDeduction.getTotal_amount() - balanceDeduction.getDeduction_amount());
 		balanceDeduction_service.save(balanceDeduction);
+		List<BalanceDeduction> list = balanceDeduction_service.getdata(balanceDeduction.getMember_id());
 		ModelAndView mav = new ModelAndView("balance_deduct");
 		long id =1;
 		Society society= societyService.getdata(id);
 				mav.addObject("society",society);
+				mav.addObject("listinfo",list);
 				mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 				
 				return mav;
