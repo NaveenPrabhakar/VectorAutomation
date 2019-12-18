@@ -75,23 +75,7 @@ public class AppController {
 	
 	
 	
-	@RequestMapping("/local_sale")
-	public String viewLocalsale(Model model)
-	{
-		log.info("Local sale Page is involked");
-		LocalSale localSale = new LocalSale();
-		long maxBillNumber = localSaleService.findMaxBillNumber();
-		localSale.setBill_number(maxBillNumber);
-		log.info("Local page  - Bill Number is - - "+maxBillNumber);
-		model.addAttribute("localsale", localSale);
-		List<LocalSale> list = localSaleService.getdata(created_date);//
-		model.addAttribute("localsales", list);
-		long id =1;
-		Society society= societyService.getdata(id);
-		model.addAttribute("society",society);
-		return "localsale";
-		
-	}
+	
 	
 	@RequestMapping("/logout")
 	public ModelAndView viewLogoutPage(Model model) {
@@ -182,17 +166,22 @@ public class AppController {
 		log.info("View member Controller invoked");
 		ModelAndView mav = new ModelAndView("view_member");
 		Boolean id_Exist = memberservice.is_Id_Exist(member.getId());
+		long id =1;
+		Society society= societyService.getdata(id);
+		
 		System.out.println("Bolean Value ---"+id_Exist);
 		if (id_Exist)
 		{
 		Member mem = memberservice.get(member.getId());
 		mav.addObject("listMember", mem);
+		
 		log.info("Member details - "+mem.toString());
 		}
 		else {
 			log.info("Member info is not available");
 			mav.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + member.getId());
 		}
+		mav.addObject("society",society);
 		return mav;
 	}
 
@@ -201,6 +190,9 @@ public class AppController {
 		log.info("Save Member controller is invoked");
 		log.info("Save Member Details - "+member.toString());
 		memberservice.save(member);
+		long id =1;
+		Society society= societyService.getdata(id);
+		modelAndView.addObject("society",society);
 		modelAndView.addObject("confirmationMessage", "ಸದಸ್ಯರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ " + member.getName());
 		modelAndView.setViewName("member");
 		return modelAndView;
@@ -210,17 +202,22 @@ public class AppController {
 	public ModelAndView edit_Memeber(@PathVariable(name = "id") int id,@ModelAttribute("member") Member member) {
 		log.info("Edit member Controller is invoked and id is "+id);
 		Boolean id_Exist = memberservice.is_Id_Exist(id);
+		long sid =1;
+		Society society= societyService.getdata(sid);
+		
 		if (id_Exist)
 		{
 			ModelAndView mav = new ModelAndView("edit_member");
 			Member mem = memberservice.get(id);
 			mav.addObject("member", mem);
+			mav.addObject("society",society);
 			return mav;
 			
 		}
 		else {
 		ModelAndView mav = new ModelAndView("view_member");
 		mav.addObject("member", member);
+		mav.addObject("society",society);
 		mav.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + member.getId());
 		return mav;
 		}
@@ -231,6 +228,8 @@ public class AppController {
 	public ModelAndView delete_Memeber(@PathVariable(name = "id") int id, ModelAndView modelAndView, @ModelAttribute("member") Member member) {
 		log.info("Delete member controller is invoked and id details - "+id);
 		Boolean id_Exist = memberservice.is_Id_Exist(id);
+		long sid =1;
+		Society society= societyService.getdata(sid);
 		if(id_Exist)
 		{
 				memberservice.delete(id);
@@ -243,6 +242,7 @@ public class AppController {
 			modelAndView.addObject("confirmationMessage", "ನೀವು ನಮೂದಿಸಿದ ಸದಸ್ಯರ ಸಂಖ್ಯೆ ಲಭ್ಯವಿಲ್ಲ  -> " + member.getId());
 			
 		}
+		modelAndView.addObject("society",society);
 		
 			return modelAndView;
 		
@@ -455,11 +455,48 @@ public class AppController {
 		milk_collectionservice.deleteById(milk_collection_id);
 		List<Milk_Collection> collections = milk_collectionservice.get_todays_Milk_Collection(created_date);
 		//Milk_Collection milk = new Milk_Collection();
+		long id =1;
+		Society society= societyService.getdata(id);
+		//("society",society);
 		ModelAndView mav = new ModelAndView("milk_wizard");
+		mav.addObject("society",society);
 		mav.addObject("confirmationMessage", "ಸದಸ್ಯರನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ " );
 		mav.addObject("milk_collection", collection);
 		mav.addObject("milk_member", collections);
 		return mav;
+		
+	}
+	
+	@RequestMapping("/local")
+	public String viewLocalsale(Model model)
+	{
+		log.info("Local sale Page is involked");
+		LocalSale localSale = new LocalSale();
+		long maxBillNumber = localSaleService.findMaxBillNumber();
+		localSale.setBill_number(maxBillNumber);
+		Double milk_quantity = milk_collectionservice.getMilkData(created_date);
+		Double local_quantity = localSaleService.local_quantity(created_date);
+		if(milk_quantity != null)
+		{
+			if(local_quantity!=null)
+			{
+				localSale.setAvailable_milk(milk_quantity - local_quantity);	
+			}else {
+				localSale.setAvailable_milk(milk_quantity);	
+			}
+			
+		}else {
+			localSale.setAvailable_milk(0);
+		}
+		log.info("Local page  - Bill Number is - - "+maxBillNumber);
+		model.addAttribute("localsale", localSale);
+		List<LocalSale> list = localSaleService.getdata(created_date);//
+		
+		model.addAttribute("localsales", list);
+		long id =1;
+		Society society= societyService.getdata(id);
+		model.addAttribute("society",society);
+		return "localsale";
 		
 	}
 	
@@ -473,9 +510,28 @@ public class AppController {
 		mav.addObject("localsales", list);
 		long id =1;
 		Society society= societyService.getdata(id);
-		modelAndView.addObject("society",society);
+		mav.addObject("society",society);
 		mav.addObject("confirmationMessage", "ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿ");
 		return mav;
+	}
+	
+	@RequestMapping("/delete_localdata/{bill_number}")
+	public ModelAndView delete_localdata(@PathVariable(name = "bill_number") int bill_number,@ModelAttribute("milk") LocalSale localsale) {
+		log.info("ID  -- - -"+bill_number);
+		log.info("/delete_localdata Controller is invoked and id is -  "+localsale.toString());
+		localSaleService.deleteId(bill_number);
+		List<LocalSale> list = localSaleService.getdata(created_date);//
+		long id =1;
+		Society society= societyService.getdata(id);
+		long maxBillNumber = localSaleService.findMaxBillNumber();
+		localsale.setBill_number(maxBillNumber);
+		ModelAndView mav = new ModelAndView("localsale");
+		mav.addObject("society",society);
+		 	mav.addObject("localsale",localsale);
+		mav.addObject("localsales", list);
+		mav.addObject("confirmationMessage", " ಯಶಸ್ವಿಯಾಗಿ ಅಳಿಸಲಾಗಿದೆ " );
+		return mav;
+		
 	}
 	
 	@GetMapping("/view_trucksheet")

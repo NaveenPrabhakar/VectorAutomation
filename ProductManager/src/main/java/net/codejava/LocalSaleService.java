@@ -31,4 +31,9 @@ public class LocalSaleService {
 	{
 		return repo.getlocalsale(created_date);
 	}
+	
+	public void deleteId(long id)
+	{
+		repo.deleteById(id);
+	}
 }
